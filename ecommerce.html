@@ -3,196 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shopping App</title>
-
+<title>E-commerce</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-/* ---------- RESET ---------- */
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f2f2f2;
-    padding-bottom: 70px;
-}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial,sans-serif; background: #f2f2f2; padding-bottom: 100px; }
 
 /* ---------- HEADER ---------- */
-.header {
-    background: #fff;
-    padding: 10px;
-}
-
-.search-container {
-    display: flex;
-    gap: 8px;
-}
-
-.search-input {
-    flex: 1;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-/* ---------- NAV ---------- */
-.category-nav {
-    display: flex;
-    background: #fff;
-    padding: 10px;
-    gap: 15px;
-    overflow-x: auto;
-}
-
-.nav-item {
-    white-space: nowrap;
-}
-
-.nav-item.active {
-    font-weight: bold;
-}
+.header { display:flex; gap:8px; padding:10px; background:#1b8f4d; }
+.search-input { flex:1; padding:10px; border-radius:6px; border:none; }
+.search-btn { padding:10px; border:none; border-radius:6px; background:#fff; color:#1b8f4d; cursor:pointer; font-weight:bold; }
 
 /* ---------- PRODUCT GRID ---------- */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    padding: 15px;
-}
+.product-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:15px; padding:15px; }
+.card { background:#fff; padding:10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; }
+.card img { width:100%; height:150px; object-fit:cover; border-radius:8px; cursor:pointer; }
+.card p { margin:6px 0; }
+.price { color:green; font-weight:bold; }
+.order-btn { margin-top:auto; padding:10px; border:none; border-radius:6px; background:#1b8f4d; color:#fff; cursor:pointer; }
 
-.card {
-    background: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
+/* ---------- MODALS ---------- */
+.modal { display:none; position:fixed; inset:0; justify-content:center; align-items:center; padding:15px; z-index:1000; }
 
-.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-}
+/* ORDER MODAL */
+#orderModal form { background:#1b8f4d; color:#fff; padding:20px; width:100%; max-width:420px; border-radius:14px; }
+#orderModal h3 { text-align:center; margin-bottom:10px; }
+#orderModal input, #orderModal textarea, #orderModal button { width:100%; margin:6px 0; padding:10px; border:none; border-radius:6px; }
+#orderModal textarea { resize:none; }
+.cancel-btn { background:#fff; color:#333; }
 
-.card p {
-    margin: 6px 0;
-}
-
-.price {
-    color: green;
-    font-weight: bold;
-}
-
-.order-btn {
-    margin-top: auto;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    background: #1b8f4d;
-    color: #fff;
-    cursor: pointer;
-}
-
-/* ---------- MODAL ---------- */
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    z-index: 1000;
-}
-
-/* ---------- GREEN FORM ---------- */
-.modal form {
-    background: #1b8f4d;
-    color: #fff;
-    padding: 20px;
-    width: 100%;
-    max-width: 420px;
-    border-radius: 14px;
-}
-
-.modal h3 {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.modal input,
-.modal textarea {
-    width: 100%;
-    margin: 6px 0;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-}
-
-.modal textarea {
-    resize: none;
-}
-
-.modal button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-/* PAYMENT BUTTONS */
-.pay-khalti {
-    background: #5c2d91;
-    color: #fff;
-}
-
-.pay-esewa {
-    background: #60bb46;
-    color: #fff;
-}
-
-.cancel-btn {
-    background: #fff;
-    color: #333;
-}
+/* IMAGE VIEW MODAL */
+#imageModal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; flex-direction:column; z-index:2000; cursor:pointer; }
+#imageModal img { display:block; max-width:80%; max-height:60vh; border-radius:10px; margin-bottom:10px; }
+#imageModal .img-info { color:#fff; text-align:center; margin-bottom:10px; }
+#imageModal .img-info h3 { margin:0; }
+#imageModal .img-info p { margin:5px 0; font-weight:bold; }
+#imageModal .img-order-btn { padding:10px 20px; background:#1b8f4d; border:none; border-radius:6px; color:#fff; cursor:pointer; }
 
 /* ---------- FOOTER ---------- */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #fff;
-    display: flex;
-    justify-content: space-around;
-    padding: 8px 0;
-    border-top: 1px solid #ddd;
-}
+.footer { position:fixed; bottom:0; width:100%; background:#1b8f4d; display:flex; flex-direction:column; align-items:center; padding:10px 0; color:#fff; }
+.footer .social-icons { margin:5px 0; }
+.footer .social-icons a, .footer .social-icons i { color:#fff; margin:0 8px; font-size:20px; text-decoration:none; cursor:pointer; }
+.footer p { margin:5px 0 0 0; font-size:14px; }
+.footer a { color:#fff; text-decoration:none; font-weight:bold; }
+.footer a:hover { color:#c7ffc7; }
 
-.bottom-nav div {
-    text-align: center;
-    font-size: 14px;
-}
-
-/* ---------- RESPONSIVE TWEAKS ---------- */
-@media (min-width: 768px) {
-    .product-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 1024px) {
-    .product-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
+/* ---------- RESPONSIVE GRID ---------- */
+@media (min-width:768px) { .product-grid { grid-template-columns:repeat(3,1fr); } }
+@media (min-width:1024px) { .product-grid { grid-template-columns:repeat(4,1fr); } }
 </style>
 </head>
 
@@ -200,111 +59,92 @@ body {
 
 <header class="header">
     <input type="text" id="searchInput" class="search-input" placeholder="Search products">
-<button id="searchBtn">Search</button>
-
-    </div>
+    <button id="searchBtn">Search</button>
 </header>
 
-<nav class="category-nav">
-    <div class="nav-item active">For You</div>
-    <div class="nav-item">Electronics</div>
-    <div class="nav-item">Accessories</div>
-</nav>
-
 <main class="product-grid">
-
-    <div class="card">
-        <img src="tws.jpg">
-        <p>Tws Airpod</p>
-        <p class="price">Rs. 600</p>
-        <button class="order-btn" data-product="Tws Airpod" data-price="600">Order Now</button>
-    </div>
-
-    <div class="card">
-        <img src="photo light clip.jpg">
-        <p>Photo Light Clip</p>
-        <p class="price">Rs. 500</p>
-        <button class="order-btn" data-product="Photo Light Clip" data-price="500">Order Now</button>
-    </div>
-
-    <div class="card">
-        <img src="RGB MOUSE.jpg">
-        <p>RGB Mouse</p>
-        <p class="price">Rs. 350</p>
-        <button class="order-btn" data-product="RGB Mouse" data-price="350">Order Now</button>
-    </div>
-
-    <div class="card">
-        <img src="rgb.jpg">
-        <p>RGB Keyboard</p>
-        <p class="price">Rs. 900</p>
-        <button class="order-btn" data-product="RGB Keyboard" data-price="900">Order Now</button>
-    </div>
-
-    <div class="card">
-        <img src="trimmer.jpg">
-        <p>Trimmer</p>
-        <p class="price">Rs. 400</p>
-        <button class="order-btn" data-product="Trimmer" data-price="400">Order Now</button>
-    </div>
-
-    <div class="card">
-        <img src="usb.jpg">
-        <p>Mini USB Hub</p>
-        <p class="price">Rs. 900</p>
-        <button class="order-btn" data-product="Mini USB Hub" data-price="900">Order Now</button>
-    </div>
-
+    <!-- All your products -->
+    <div class="card"><img src="tws.jpg" alt="Tws Airpod"><p>Tws Airpod</p><p class="price">Rs. 600</p><button class="order-btn" data-product="Tws Airpod" data-price="600">Order Now</button></div>
+    <div class="card"><img src="photo light clip.jpg" alt="Photo Light Clip"><p>Photo Light Clip</p><p class="price">Rs. 500</p><button class="order-btn" data-product="Photo Light Clip" data-price="500">Order Now</button></div>
+    <div class="card"><img src="RGB MOUSE.jpg" alt="RGB Mouse"><p>RGB Mouse</p><p class="price">Rs. 350</p><button class="order-btn" data-product="RGB Mouse" data-price="350">Order Now</button></div>
+    <div class="card"><img src="rgb.jpg" alt="RGB Keyboard"><p>RGB Keyboard</p><p class="price">Rs. 900</p><button class="order-btn" data-product="RGB Keyboard" data-price="900">Order Now</button></div>
+    <div class="card"><img src="trimmer.jpg" alt="Trimmer"><p>Trimmer</p><p class="price">Rs. 400</p><button class="order-btn" data-product="Trimmer" data-price="400">Order Now</button></div>
+    <div class="card"><img src="usb.jpg" alt="Mini USB Hub"><p>Mini USB Hub</p><p class="price">Rs. 900</p><button class="order-btn" data-product="Mini USB Hub" data-price="900">Order Now</button></div>
+    <div class="card"><img src="barca jersy.jpg" alt="Barcelona jersy"><p>Barcelona jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="Barcelona jersy" data-price="900">Order Now</button></div>
+    <div class="card"><img src="barca old jers.jpg" alt="Barcelona old jersy"><p>Barcelona old jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="Barcelona old jersy" data-price="900">Order Now</button></div>
+    <div class="card"><img src="Barcelona.jpg" alt="Barcelona Jersy"><p>Barcelona Jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="Barcelona Jersy" data-price="900">Order Now</button></div>
+    <div class="card"><img src="barcelona jersy.jpg" alt="Barcelona jersy"><p>Barcelona jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="Barcelona jersy" data-price="900">Order Now</button></div>
+    <div class="card"><img src="argentina old jersy.jpg" alt="Argentina Old Jersy"><p>Argentina Old Jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="Argentina Old Jersy" data-price="900">Order Now</button></div>
+    <div class="card"><img src="manchaster.jpg" alt="Manchaster United Red Jersy"><p>Manchaster United Red Jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="Manchaster United Red Jersy" data-price="900">Order Now</button></div>
+    <div class="card"><img src="manchester.jpg" alt="Manchaster United Jersy"><p>Manchaster United Jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="Manchaster United Jersy" data-price="900">Order Now</button></div>
+    <div class="card"><img src="real madrid jersy.jpg" alt="Realmadrid Jersy"><p>Realmadrid Jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="Realmadrid Jersy" data-price="900">Order Now</button></div>
+    <div class="card"><img src="csk jersy.jpg" alt="CSK Jersy"><p>CSK Jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="CSK Jersy" data-price="900">Order Now</button></div>
+    <div class="card"><img src="Mi jersy.jpg" alt="Mumbai Indian Jersy"><p>Mumbai Indian Jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="Mumbai Indian Jersy" data-price="900">Order Now</button></div>
+    <div class="card"><img src="yellow jersy.jpg" alt="Yellow Jersy"><p>Yellow Jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="Yellow Jersy" data-price="900">Order Now</button></div>
+    <div class="card"><img src="white and red jersy.jpg" alt="White and Red Jersy"><p>White and Red Jersy</p><p class="price">Rs. 900</p><button class="order-btn" data-product="White and Red Jersy" data-price="900">Order Now</button></div>
 </main>
+
+<!-- IMAGE VIEW MODAL -->
+<div id="imageModal" class="modal">
+    <img id="modalImg" src="">
+    <div class="img-info">
+        <h3 id="modalTitle"></h3>
+        <p id="modalPrice"></p>
+    </div>
+    <button class="img-order-btn" id="modalOrderBtn">Order Now</button>
+</div>
 
 <!-- ORDER MODAL -->
 <div id="orderModal" class="modal">
 <form id="orderForm" action="https://formspree.io/f/xqeldbro" method="POST">
-
     <h3>Confirm Order</h3>
-
     <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Your Email" required>
-
     <input type="text" name="product" id="productName" readonly>
     <input type="text" name="price" id="productPrice" readonly>
-
     <input type="number" name="quantity" placeholder="Quantity" required>
     <textarea name="message" placeholder="Address / Notes"></textarea>
-
+    <input type="number" name="Contact" placeholder="Contact" required>
+    <input type="hidden" name="paymentMethod" id="paymentMethod" value="Cash on Delivery">
     <input type="hidden" name="_subject" value="New Order">
     <input type="hidden" name="_template" value="table">
 
-    <button type="submit">Cash on Delivery</button>
-    <button type="button" class="pay-khalti" onclick="payKhalti()">Pay with Khalti</button>
-    <button type="button" class="pay-esewa" onclick="payEsewa()">Pay with eSewa</button>
+    <button type="submit" onclick="setCash()">Cash on Delivery</button>
     <button type="button" class="cancel-btn" id="closeModal">Cancel</button>
-
 </form>
 </div>
 
+<!-- FOOTER -->
+<div class="footer">
+  <div class="social-icons">
+    <a href="#"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+    <a href="https://www.instagram.com/_anveshan__"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+    <a href="#"><i class="fa fa-twitter w3-hover-opacity"></i></a>
+  </div>
+  <p>Powered by <a href="#" target="_blank" class="w3-hover-text-green">Anveshan</a></p>
+</div>
+
 <script>
+/* ORDER MODAL */
 const buttons = document.querySelectorAll(".order-btn");
 const modal = document.getElementById("orderModal");
 const closeBtn = document.getElementById("closeModal");
 const form = document.getElementById("orderForm");
-
 const productName = document.getElementById("productName");
 const productPrice = document.getElementById("productPrice");
+const paymentMethod = document.getElementById("paymentMethod");
 
-/* OPEN MODAL */
 buttons.forEach(btn => {
     btn.addEventListener("click", () => {
         productName.value = btn.dataset.product;
         productPrice.value = "Rs. " + btn.dataset.price;
+        paymentMethod.value = "Cash on Delivery";
         modal.style.display = "flex";
     });
 });
 
-/* CLOSE MODAL */
 closeBtn.onclick = () => modal.style.display = "none";
 
-/* FORM SUBMIT (FORM SPREE) */
 form.addEventListener("submit", async e => {
     e.preventDefault();
     await fetch(form.action, {
@@ -312,43 +152,60 @@ form.addEventListener("submit", async e => {
         body: new FormData(form),
         headers: { "Accept": "application/json" }
     });
-    alert("✅ Order placed successfully!");
+    alert("✅ Order placed successfully! Payment: " + paymentMethod.value);
     form.reset();
     modal.style.display = "none";
 });
 
-/* PAYMENT LINKS */
-function payKhalti() {
-    alert("Complete payment, then submit order.");
-    window.open("https://khalti.com", "_blank");
-}
+function setCash() { paymentMethod.value = "Cash on Delivery"; }
 
-function payEsewa() {
-    alert("Complete payment, then submit order.");
-    window.open("https://esewa.com.np", "_blank");
-}
+/* SEARCH */
 const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 const products = document.querySelectorAll(".card");
 
 function searchProducts() {
     const value = searchInput.value.toLowerCase().trim();
-
     products.forEach(card => {
         const name = card.querySelector("p").innerText.toLowerCase();
-        if (name.includes(value) && value !== "") {
-            card.style.display = "flex"; // show matching product
-        } else if (value === "") {
-            card.style.display = "flex"; // show all if empty search
-        } else {
-            card.style.display = "none"; // hide non-matching
-        }
+        card.style.display = name.includes(value) || value === "" ? "flex" : "none";
     });
 }
-
 searchBtn.addEventListener("click", searchProducts);
 searchInput.addEventListener("keyup", searchProducts);
 
+/* IMAGE TAP TO VIEW WITH ORDER BUTTON */
+const imageModal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImg");
+const modalTitle = document.getElementById("modalTitle");
+const modalPrice = document.getElementById("modalPrice");
+const modalOrderBtn = document.getElementById("modalOrderBtn");
+
+document.querySelectorAll(".card").forEach(card => {
+    const img = card.querySelector("img");
+    const title = card.querySelector("p").innerText;
+    const price = card.querySelector(".price").innerText;
+    const orderBtn = card.querySelector(".order-btn");
+
+    img.addEventListener("click", () => {
+        modalImg.src = img.src;
+        modalTitle.textContent = title;
+        modalPrice.textContent = price;
+        imageModal.style.display = "flex";
+
+        modalOrderBtn.onclick = () => {
+            productName.value = title;
+            productPrice.value = price;
+            paymentMethod.value = "Cash on Delivery";
+            modal.style.display = "flex";
+            imageModal.style.display = "none";
+        };
+    });
+});
+
+imageModal.addEventListener("click", (e) => {
+    if(e.target === imageModal) imageModal.style.display = "none";
+});
 </script>
 
 </body>
