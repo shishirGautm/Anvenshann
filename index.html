@@ -21,7 +21,14 @@
             background-image: url("bb.jpg");
             min-height: 100%;
         }
-
+ .bgimg-2 {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("ecommerce.jpg");
+            min-height: 100%;
+        }
         @media only screen and (max-width: 768px) {
             .bgimg-1 { background-attachment: scroll; }
         }
@@ -63,7 +70,7 @@
       <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
       <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
       <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
-      <a href="#book" class="w3-bar-item w3-button"><i class="fa fa-book"></i> BOOK</a>
+    
       <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
       <a href="ecommerce.html" class="w3-bar-item w3-button"><i class="fa fa-shopping-cart"></i> E-commerce</a>
     </div>
@@ -79,7 +86,7 @@
   <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
   <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">TEAM</a>
   <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
-  <a href="#book" onclick="w3_close()" class="w3-bar-item w3-button">BOOK</a>
+
   <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
   <a href="ecommerce.html" onclick="w3_close()" class="w3-bar-item w3-button">E-commerce</a>
 </nav>
@@ -218,14 +225,19 @@
   </div>
 </div>
 
+
+   <center> <h2 class="w3-wide" style="background-color: black;color: aliceblue;">OUR E-commerce Site</h2>
+    <p class="w3-opacity"><i>Available for order</i></p></center>
+<header class="bgimg-2 w3-display-container w3-opacity-min" id="home">
+  <div class="w3-display-middle" style="white-space:nowrap;">
+    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity"><a href="ecommerce.html"> Click here to Go. </a></span>
+  </div>
+</header>
+
 <!-- E-commerce Section -->
-<div class="w3-black" id="book" style="padding:128px 16px">
-  <div class="w3-container w3-content w3-center" style="max-width:800px">
-    <h2 class="w3-wide">OUR E-commerce Site</h2>
-    <p class="w3-opacity"><i>Available for order</i></p>
+
    
-          <a href="ecommerce.html" class="w3-button w3-white w3-margin-bottom">Click Here to Go</a>
-      </div>
+       
     </div>
   </div>
 </div>
