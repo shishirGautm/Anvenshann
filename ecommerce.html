@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping App</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+/* ---------- RESET ---------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    padding-bottom: 70px;
+}
+
+/* ---------- HEADER ---------- */
+.header {
+    background: #fff;
+    padding: 10px;
+}
+
+.search-container {
+    display: flex;
+    gap: 8px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ---------- NAV ---------- */
+.category-nav {
+    display: flex;
+    background: #fff;
+    padding: 10px;
+    gap: 15px;
+    overflow-x: auto;
+}
+
+.nav-item {
+    white-space: nowrap;
+}
+
+.nav-item.active {
+    font-weight: bold;
+}
+
+/* ---------- PRODUCT GRID ---------- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 15px;
+}
+
+.card {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card p {
+    margin: 6px 0;
+}
+
+.price {
+    color: green;
+    font-weight: bold;
+}
+
+.order-btn {
+    margin-top: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #1b8f4d;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ---------- MODAL ---------- */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    z-index: 1000;
+}
+
+/* ---------- GREEN FORM ---------- */
+.modal form {
+    background: #1b8f4d;
+    color: #fff;
+    padding: 20px;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 14px;
+}
+
+.modal h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.modal input,
+.modal textarea {
+    width: 100%;
+    margin: 6px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+}
+
+.modal textarea {
+    resize: none;
+}
+
+.modal button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+/* PAYMENT BUTTONS */
+.pay-khalti {
+    background: #5c2d91;
+    color: #fff;
+}
+
+.pay-esewa {
+    background: #60bb46;
+    color: #fff;
+}
+
+.cancel-btn {
+    background: #fff;
+    color: #333;
+}
+
+/* ---------- FOOTER ---------- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0;
+    border-top: 1px solid #ddd;
+}
+
+.bottom-nav div {
+    text-align: center;
+    font-size: 14px;
+}
+
+/* ---------- RESPONSIVE TWEAKS ---------- */
+@media (min-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search products">
+<button id="searchBtn">Search</button>
+
+    </div>
+</header>
+
+<nav class="category-nav">
+    <div class="nav-item active">For You</div>
+    <div class="nav-item">Electronics</div>
+    <div class="nav-item">Accessories</div>
+</nav>
+
+<main class="product-grid">
+
+    <div class="card">
+        <img src="tws.jpg">
+        <p>Tws Airpod</p>
+        <p class="price">Rs. 600</p>
+        <button class="order-btn" data-product="Tws Airpod" data-price="600">Order Now</button>
+    </div>
+
+    <div class="card">
+        <img src="photo light clip.jpg">
+        <p>Photo Light Clip</p>
+        <p class="price">Rs. 500</p>
+        <button class="order-btn" data-product="Photo Light Clip" data-price="500">Order Now</button>
+    </div>
+
+    <div class="card">
+        <img src="RGB MOUSE.jpg">
+        <p>RGB Mouse</p>
+        <p class="price">Rs. 350</p>
+        <button class="order-btn" data-product="RGB Mouse" data-price="350">Order Now</button>
+    </div>
+
+    <div class="card">
+        <img src="rgb.jpg">
+        <p>RGB Keyboard</p>
+        <p class="price">Rs. 900</p>
+        <button class="order-btn" data-product="RGB Keyboard" data-price="900">Order Now</button>
+    </div>
+
+    <div class="card">
+        <img src="trimmer.jpg">
+        <p>Trimmer</p>
+        <p class="price">Rs. 400</p>
+        <button class="order-btn" data-product="Trimmer" data-price="400">Order Now</button>
+    </div>
+
+    <div class="card">
+        <img src="usb.jpg">
+        <p>Mini USB Hub</p>
+        <p class="price">Rs. 900</p>
+        <button class="order-btn" data-product="Mini USB Hub" data-price="900">Order Now</button>
+    </div>
+
+</main>
+
+<!-- ORDER MODAL -->
+<div id="orderModal" class="modal">
+<form id="orderForm" action="https://formspree.io/f/xqeldbro" method="POST">
+
+    <h3>Confirm Order</h3>
+
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+
+    <input type="text" name="product" id="productName" readonly>
+    <input type="text" name="price" id="productPrice" readonly>
+
+    <input type="number" name="quantity" placeholder="Quantity" required>
+    <textarea name="message" placeholder="Address / Notes"></textarea>
+
+    <input type="hidden" name="_subject" value="New Order">
+    <input type="hidden" name="_template" value="table">
+
+    <button type="submit">Cash on Delivery</button>
+    <button type="button" class="pay-khalti" onclick="payKhalti()">Pay with Khalti</button>
+    <button type="button" class="pay-esewa" onclick="payEsewa()">Pay with eSewa</button>
+    <button type="button" class="cancel-btn" id="closeModal">Cancel</button>
+
+</form>
+</div>
+
+<script>
+const buttons = document.querySelectorAll(".order-btn");
+const modal = document.getElementById("orderModal");
+const closeBtn = document.getElementById("closeModal");
+const form = document.getElementById("orderForm");
+
+const productName = document.getElementById("productName");
+const productPrice = document.getElementById("productPrice");
+
+/* OPEN MODAL */
+buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        productName.value = btn.dataset.product;
+        productPrice.value = "Rs. " + btn.dataset.price;
+        modal.style.display = "flex";
+    });
+});
+
+/* CLOSE MODAL */
+closeBtn.onclick = () => modal.style.display = "none";
+
+/* FORM SUBMIT (FORM SPREE) */
+form.addEventListener("submit", async e => {
+    e.preventDefault();
+    await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { "Accept": "application/json" }
+    });
+    alert("✅ Order placed successfully!");
+    form.reset();
+    modal.style.display = "none";
+});
+
+/* PAYMENT LINKS */
+function payKhalti() {
+    alert("Complete payment, then submit order.");
+    window.open("https://khalti.com", "_blank");
+}
+
+function payEsewa() {
+    alert("Complete payment, then submit order.");
+    window.open("https://esewa.com.np", "_blank");
+}
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+const products = document.querySelectorAll(".card");
+
+function searchProducts() {
+    const value = searchInput.value.toLowerCase().trim();
+
+    products.forEach(card => {
+        const name = card.querySelector("p").innerText.toLowerCase();
+        if (name.includes(value) && value !== "") {
+            card.style.display = "flex"; // show matching product
+        } else if (value === "") {
+            card.style.display = "flex"; // show all if empty search
+        } else {
+            card.style.display = "none"; // hide non-matching
+        }
+    });
+}
+
+searchBtn.addEventListener("click", searchProducts);
+searchInput.addEventListener("keyup", searchProducts);
+
+</script>
+
+</body>
+</html>
