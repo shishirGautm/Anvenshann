@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        body, h1, h2, h3, h4, h5, h6 { font-family: "Raleway", sans-serif }
+        body, h1, h2, h3, h4, h5, h6 { font-family: "Raleway", sans-serif; }
         body, html { height: 100%; line-height: 1.8; scroll-behavior: smooth; }
 
         /* Parallax Styling */
@@ -27,9 +27,9 @@
         }
 
         .w3-bar .w3-button { padding: 16px; }
-        
+
         /* Form Styling */
-        .order-form input, .order-form select {
+        .order-form input, .order-form select, .order-form textarea {
             width: 100%;
             padding: 12px;
             margin: 8px 0;
@@ -38,6 +38,7 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+
         .pay-button {
             width: 100%;
             background-color: #009688;
@@ -52,6 +53,7 @@
 </head>
 <body>
 
+<!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card" id="myNavbar">
     <a href="#home" class="w3-bar-item w3-button w3-wide">
@@ -63,15 +65,15 @@
       <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
       <a href="#book" class="w3-bar-item w3-button"><i class="fa fa-book"></i> BOOK</a>
       <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
-      <a href="ecommerce.html" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> E-commerce</a>
+      <a href="ecommerce.html" class="w3-bar-item w3-button"><i class="fa fa-shopping-cart"></i> E-commerce</a>
     </div>
-
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
       <i class="fa fa-bars"></i>
     </a>
   </div>
 </div>
 
+<!-- Sidebar -->
 <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
   <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
@@ -79,15 +81,17 @@
   <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
   <a href="#book" onclick="w3_close()" class="w3-bar-item w3-button">BOOK</a>
   <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
-  <a href="ecommerce.html" onclick="w3_close()" class="w3-bar-item w3-button"> E-commerce</a>
+  <a href="ecommerce.html" onclick="w3_close()" class="w3-bar-item w3-button">E-commerce</a>
 </nav>
 
+<!-- Header -->
 <header class="bgimg-1 w3-display-container w3-opacity-min" id="home">
   <div class="w3-display-middle" style="white-space:nowrap;">
     <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">ANVESHAN</span>
   </div>
 </header>
 
+<!-- About Section -->
 <div class="w3-container" style="padding:128px 16px" id="about">
   <h3 class="w3-center">ABOUT THE COMPANY</h3>
   <p class="w3-center w3-large">Key features of our company</p>
@@ -115,19 +119,21 @@
   </div>
 </div>
 
-<!-- Promo Section - "We know design" -->
+<!-- Promo Section -->
 <div class="w3-container w3-light-grey" style="padding:128px 16px">
   <div class="w3-row-padding">
     <div class="w3-col m6">
       <h3>We know design.</h3>
-      <p>Design rooted in culture, shaped by purpose <br> culture, clarity and craft converge.</p>
-      <p><a href="#work" class="w3-button w3-black"><i class="fa fa-th"> </i> View Our Works</a></p>
+      <p>Design rooted in culture, shaped by purpose. Culture, clarity, and craft converge.</p>
+      <p><a href="#work" class="w3-button w3-black"><i class="fa fa-th"> </i> View Our Works</a></p>
     </div>
     <div class="w3-col m6">
       <img class="w3-image w3-round-large" src="Anveshan.jpg" alt="Buildings" width="700" height="394">
     </div>
   </div>
 </div>
+
+<!-- Team Section -->
 <div class="w3-container" style="padding:128px 16px" id="team">
   <h3 class="w3-center">THE TEAM</h3>
   <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
@@ -136,7 +142,7 @@
         <img src="shishirr.jpg" alt="Shishir" style="width:100%">
         <div class="w3-container">
           <h3>Shishir Gautam</h3>
-          <p class="w3-opacity"> Frontend Developer & Graphics Designer</p>
+          <p class="w3-opacity">Frontend Developer & Graphics Designer</p>
           <p>Expert in visual design and photography with a focus on purposeful execution.</p>
           <p><a href="shishir.html" class="w3-button w3-light-grey w3-block">More</a></p>
         </div>
@@ -178,6 +184,7 @@
   </div>
 </div>
 
+<!-- Work Section -->
 <div class="w3-container" style="padding:128px 16px" id="work">
   <h3 class="w3-center">OUR WORK</h3>
   <div class="w3-row-padding" style="margin-top:64px">
@@ -188,7 +195,8 @@
   </div>
 </div>
 
-<div class="w3-container w3-light-grey w3-padding-64">
+<!-- Skills Section -->
+<div class="w3-container w3-light-grey" style="padding:128px 16px">
   <div class="w3-row-padding">
     <div class="w3-col m6">
       <h3><b>Our Skills.</b></h3>
@@ -201,71 +209,28 @@
     </div>
     <div class="w3-col m6">
       <p class="w3-wide"><i class="fa fa-camera w3-margin-right"></i>Photography 99%</p>
-      <div class="w3-grey"><div class="w3-container w3-dark-grey w3-center" style="width:99%">99%</div></div>
+      <div class="w3-grey"><div class="w3-container w3-black w3-center" style="width:99%">99%</div></div>
       <p class="w3-wide"><i class="fa fa-desktop w3-margin-right"></i>Web Design 85%</p>
-      <div class="w3-grey"><div class="w3-container w3-dark-grey w3-center" style="width:85%">85%</div></div>
+      <div class="w3-grey"><div class="w3-container w3-black w3-center" style="width:85%">85%</div></div>
       <p class="w3-wide"><i class="fa fa-book w3-margin-right"></i>Book Writing 93%</p>
-      <div class="w3-grey"><div class="w3-container w3-dark-grey w3-center" style="width:93%">93%</div></div>
+      <div class="w3-grey"><div class="w3-container w3-black w3-center" style="width:93%">93%</div></div>
     </div>
   </div>
 </div>
 
+<!-- E-commerce Section -->
 <div class="w3-black" id="book" style="padding:128px 16px">
   <div class="w3-container w3-content w3-center" style="max-width:800px">
-    <h2 class="w3-wide">OUR BOOKS</h2>
+    <h2 class="w3-wide">OUR E-commerce Site</h2>
     <p class="w3-opacity"><i>Available for order</i></p>
-    <div class="w3-row-padding w3-padding-32">
-      <div class="w3-third w3-margin-bottom">
-        <img src="b1.jpg" alt="A quiet Light" style="width:100%" class="w3-hover-opacity">
-        <div class="w3-container w3-white w3-text-black">
-          <p><b>A quiet Light</b></p>
-          <p class="w3-tag w3-red">Sold out</p>
-        </div>
+   
+          <a href="ecommerce.html" class="w3-button w3-white w3-margin-bottom">Click Here to Go</a>
       </div>
-      <div class="w3-third w3-margin-bottom">
-        <img src="bb2.png" alt="Words left In My Notes" style="width:100%" class="w3-hover-opacity">
-        <div class="w3-container w3-white w3-text-black">
-          <p><b>Words left In My Notes</b></p>
-          <p class="w3-tag w3-red">Sold out</p>
-        </div>
-      </div>
-      <div class="w3-third w3-margin-bottom">
-        <img src="bb3.jpg" alt="Coming Soon" style="width:100%" class="w3-hover-opacity">
-        <div class="w3-container w3-white w3-text-black">
-          <p><b>New Release</b></p>
-          <p class="w3-opacity">Coming Soon</p>
-        </div>
-      </div>
-    </div>
-    <button class="w3-button w3-white w3-margin-bottom" onclick="document.getElementById('ticketModal').style.display='block'">Buy Book</button>
-  </div>
-</div>
-
-<div id="ticketModal" class="w3-modal">
-  <div class="w3-modal-content w3-animate-top w3-card-4">
-    <header class="w3-container w3-teal w3-center w3-padding-32"> 
-      <span onclick="document.getElementById('ticketModal').style.display='none'" class="w3-button w3-teal w3-xlarge w3-display-topright">×</span>
-      <h2 class="w3-wide"><i class="fa fa-book w3-margin-right"></i>Order Your Book</h2>
-    </header>
-    <div class="w3-container w3-padding-16">
-      <form action="https://formspree.io/f/xbdydqvj" method="POST" class="order-form" id="bookForm">
-        <p class="w3-center">Per book Rs. 449</p>
-        <label>How many?</label>
-        <input type="number" name="quantity" required min="1">
-        <label>Book Name</label>
-        <input type="text" name="book_name" placeholder="e.g. A Quiet Light" required>
-        <label>Contact Number</label>
-        <input type="text" name="contact" required>
-        <label>Shipping Address</label>
-        <input type="text" name="address" required>
-        <label>Email Address</label>
-        <input type="email" name="email" required>
-        <button type="submit" class="pay-button">Submit Order</button>
-      </form>
     </div>
   </div>
 </div>
 
+<!-- Contact Section -->
 <div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
   <h3 class="w3-center">CONTACT</h3>
   <div class="w3-row-padding" style="margin-top:48px">
@@ -286,6 +251,7 @@
   </div>
 </div>
 
+<!-- Footer -->
 <footer class="w3-center w3-black w3-padding-64">
   <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
   <div class="w3-xlarge w3-section">
@@ -296,47 +262,25 @@
   <p>Powered by <a href="#" target="_blank" class="w3-hover-text-green">Anveshan</a></p>
 </footer>
 
-<script>
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-}
-
-// Sidebar toggle
-var mySidebar = document.getElementById("mySidebar");
-function w3_open() {
-  mySidebar.style.display = (mySidebar.style.display === 'block') ? 'none' : 'block';
-}
-function w3_close() {
-  mySidebar.style.display = "none";
-}
-
-// Form Handlers
-document.getElementById("bookForm").onsubmit = async (e) => {
-  e.preventDefault();
-  const form = e.target;
-  const response = await fetch(form.action, {
-    method: 'POST',
-    body: new FormData(form),
-    headers: { 'Accept': 'application/json' }
-  });
-  if (response.ok) {
-    alert("Order submitted! We'll contact you soon.");
-    form.reset();
-    document.getElementById('ticketModal').style.display='none';
-  } else {
-    alert("Something went wrong. Please try again.");
-  }
-};
-</script>
-
+<!-- Image Modal -->
 <div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
   <span class="w3-button w3-xxlarge w3-black w3-padding-large w3-display-topright">×</span>
   <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
     <img id="img01" class="w3-image" style="max-width: 90%;">
   </div>
 </div>
+
+<script>
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+}
+var mySidebar = document.getElementById("mySidebar");
+function w3_open() {
+  mySidebar.style.display = (mySidebar.style.display === 'block') ? 'none' : 'block';
+}
+function w3_close() { mySidebar.style.display = "none"; }
+</script>
 
 </body>
 </html>
