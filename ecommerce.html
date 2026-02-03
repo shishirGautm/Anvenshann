@@ -12,17 +12,18 @@
 body { margin:0; font-family:Arial,sans-serif; background:#f2f2f2; padding-bottom:120px; }
 
 /* HEADER */
-.header { display:flex; gap:8px; padding:10px; background:#1b8f4d; }
-.search-input { flex:1; padding:10px; border-radius:6px; border:none; }
-.search-btn { padding:10px; border:none; border-radius:6px; background:#fff; color:#1b8f4d; font-weight:bold; cursor:pointer; }
+.header { display:flex; flex-wrap:wrap; gap:8px; padding:10px; background:#1b8f4d; }
+.search-input { flex:1 1 60%; padding:10px; border-radius:6px; border:none; min-width:120px; }
+.search-btn { flex:1 1 30%; padding:10px; border:none; border-radius:6px; background:#fff; color:#1b8f4d; font-weight:bold; cursor:pointer; min-width:80px; }
 
 /* PRODUCTS */
 .product-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:15px; padding:15px; }
 .card { background:#fff; padding:10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; position:relative; }
-.card img { width:100%; height:150px; object-fit:cover; border-radius:8px; cursor:pointer; }
-.card p { margin:6px 0; }
-.price { color:green; font-weight:bold; }
-.order-btn { margin-top:auto; padding:10px; border:none; border-radius:6px; background:#1b8f4d; color:#fff; cursor:pointer; }
+.card img { width:100%; height:150px; object-fit:cover; border-radius:8px; cursor:pointer; transition: transform .2s; }
+.card img:hover { transform: scale(1.05); }
+.card p { margin:6px 0; font-size:14px; }
+.price { color:green; font-weight:bold; font-size:14px; }
+.order-btn { margin-top:auto; padding:10px; border:none; border-radius:6px; background:#1b8f4d; color:#fff; cursor:pointer; font-size:14px; }
 
 /* SOLD OUT */
 .sold-badge { position:absolute; top:10px; left:10px; background:red; color:#fff; padding:5px 8px; border-radius:6px; font-size:12px; }
@@ -30,22 +31,34 @@ body { margin:0; font-family:Arial,sans-serif; background:#f2f2f2; padding-botto
 .sold-btn { background:#aaa!important; cursor:not-allowed; }
 
 /* MODALS */
-.modal { display:none; position:fixed; inset:0; justify-content:center; align-items:center; padding:15px; z-index:1000; }
+.modal { display:none; position:fixed; inset:0; justify-content:center; align-items:center; padding:15px; z-index:1000; overflow:auto; }
 #orderModal form, #imageModal { background:#1b8f4d; color:#fff; padding:20px; width:100%; max-width:420px; border-radius:14px; display:flex; flex-direction:column; }
-#orderModal input, #orderModal textarea, #orderModal button, #imageModal button, #orderModal select { width:100%; margin:6px 0; padding:10px; border:none; border-radius:6px; }
+#orderModal input, #orderModal textarea, #orderModal button, #imageModal button, #orderModal select { width:100%; margin:6px 0; padding:10px; border:none; border-radius:6px; font-size:14px; }
 .cancel-btn { background:#fff; color:#333; cursor:pointer; }
 #imageModal { background:rgba(0,0,0,.8); align-items:center; cursor:pointer; }
-#imageModal img { max-width:80%; max-height:60vh; border-radius:10px; }
-#imageModal .img-info { color:#fff; text-align:center; margin:10px; }
+#imageModal img { max-width:90%; max-height:60vh; border-radius:10px; }
+#imageModal .img-info { color:#fff; text-align:center; margin:10px; font-size:14px; }
 
 /* FOOTER */
-.footer { position:fixed; bottom:0; width:100%; background:#1b8f4d; color:#fff; display:flex; flex-direction:column; align-items:center; padding:10px; }
+.footer { position:fixed; bottom:0; width:100%; background:#1b8f4d; color:#fff; display:flex; flex-direction:column; align-items:center; padding:10px; font-size:14px; }
 .footer a { color:#fff; text-decoration:none; font-weight:bold; }
 .footer .whatsapp-btn { background:#25D366; color:#fff; padding:10px 15px; border-radius:50px; text-decoration:none; margin-top:5px; display:flex; align-items:center; gap:5px; }
 
 /* RESPONSIVE GRID */
 @media (min-width:768px) { .product-grid { grid-template-columns:repeat(3,1fr); } }
 @media (min-width:1024px) { .product-grid { grid-template-columns:repeat(4,1fr); } }
+
+/* MOBILE SPECIFIC */
+@media (max-width:480px) {
+  .header { flex-direction:column; }
+  .search-input { flex:1 1 100%; margin-bottom:5px; }
+  .search-btn { flex:1 1 100%; }
+  .card img { height:120px; }
+  .order-btn { padding:8px; font-size:13px; }
+  #orderModal form, #imageModal { padding:15px; max-width:90%; }
+  #imageModal img { max-width:95%; max-height:50vh; }
+  .footer { font-size:13px; padding:8px; }
+}
 </style>
 </head>
 <body>
@@ -78,7 +91,6 @@ body { margin:0; font-family:Arial,sans-serif; background:#f2f2f2; padding-botto
 <input name="product" id="productName" readonly>
 <input name="price" id="productPrice" readonly>
 
-<!-- Payment Method -->
 <label for="payment">Payment Method:</label>
 <select name="payment" id="payment" required>
   <option value="cod">Cash on Delivery</option>
@@ -89,9 +101,7 @@ body { margin:0; font-family:Arial,sans-serif; background:#f2f2f2; padding-botto
 <textarea name="address" placeholder="Address / Notes"></textarea>
 <input name="contact" placeholder="Contact" required>
 <button type="submit">Confirm Order</button>
-<p style="text-align: center;"> You must be paid Advance only for Jersy.</p>
-<div class="w3-display-middle" style="white-space:nowrap;">
-
+<p style="text-align: center;">You must pay advance only for Jersey.</p>
 <button type="button" class="cancel-btn" id="closeModal">Cancel</button>
 </form>
 </div>
@@ -174,7 +184,6 @@ imgModal.onclick=e=>{if(e.target===imgModal)imgModal.style.display="none";}
 // FORM SUBMISSION - redirect to WhatsApp
 document.getElementById("orderForm").addEventListener("submit", e => {
   e.preventDefault();
-
   const form = e.target;
   const name = encodeURIComponent(form.name.value);
   const email = encodeURIComponent(form.email.value);
@@ -185,11 +194,8 @@ document.getElementById("orderForm").addEventListener("submit", e => {
   const contact = encodeURIComponent(form.contact.value);
   const payment = encodeURIComponent(form.payment.value);
 
-  // WhatsApp URL with pre-filled message
-  const waMessage = `Hello! I want to place an order:\n\nName: ${name}\nEmail: ${email}\nProduct: ${product}\nPrice: ${price}\nQuantity: ${quantity}\nPayment Method: ${payment}\nAddress/Notes: ${address}\nContact: ${contact}`;
+  const waMessage = `Hello! I want to place an order:\n\n\tName: ${name}\nEmail: ${email}\n\tProduct: ${product}\n\tPrice: ${price}\n\tQuantity: ${quantity}\n\tPayment Method: ${payment}\n\tAddress/Notes: ${address}\n\tContact: ${contact}`;
   const waURL = `https://wa.me/9779761120781?text=${waMessage}`;
-
-  // Open WhatsApp in a new tab
   window.open(waURL, "_blank");
 
   form.reset();
