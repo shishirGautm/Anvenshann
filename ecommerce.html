@@ -194,7 +194,7 @@ document.getElementById("orderForm").addEventListener("submit", e => {
   const contact = encodeURIComponent(form.contact.value);
   const payment = encodeURIComponent(form.payment.value);
 
-  const waMessage = `Hello! I want to place an order:\n\n\tName: ${name}\nEmail: ${email}\n\tProduct: ${product}\n\tPrice: ${price}\n\tQuantity: ${quantity}\n\tPayment Method: ${payment}\n\tAddress/Notes: ${address}\n\tContact: ${contact}`;
+  const waMessage = `Hello! I want to place an order:\n\n\tName:\t ${name}\nEmail: \t${email}\n\tProduct: \t${product}\n\tPrice: \t${price}\n\tQuantity: \t${quantity}\n\tPayment Method: \t${payment}\n\tAddress/Notes: \t${address}\nContact: ${contact}`;
   const waURL = `https://wa.me/9779761120781?text=${waMessage}`;
   window.open(waURL, "_blank");
 
