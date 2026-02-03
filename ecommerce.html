@@ -4,63 +4,158 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>E-commerce</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/0/0b/Shopping_cart_font_awesome.svg" type="image/png">
 
 <style>
-* { box-sizing: border-box; }
-body { margin:0; font-family:Arial,sans-serif; background:#f2f2f2; padding-bottom:120px; }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f2f2f2;
+  padding-bottom:120px;
+}
 
 /* HEADER */
-.header { display:flex; flex-wrap:wrap; gap:8px; padding:10px; background:#1b8f4d; }
-.search-input { flex:1 1 60%; padding:10px; border-radius:6px; border:none; min-width:120px; }
-.search-btn { flex:1 1 30%; padding:10px; border:none; border-radius:6px; background:#fff; color:#1b8f4d; font-weight:bold; cursor:pointer; min-width:80px; }
+.header{
+  display:flex;
+  gap:8px;
+  padding:10px;
+  background:#1b8f4d;
+}
+.search-input{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:6px;
+}
+.search-btn{
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  background:#fff;
+  color:#1b8f4d;
+  font-weight:bold;
+}
 
 /* PRODUCTS */
-.product-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:15px; padding:15px; }
-.card { background:#fff; padding:10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; position:relative; }
-.card img { width:100%; height:150px; object-fit:cover; border-radius:8px; cursor:pointer; transition: transform .2s; }
-.card img:hover { transform: scale(1.05); }
-.card p { margin:6px 0; font-size:14px; }
-.price { color:green; font-weight:bold; font-size:14px; }
-.order-btn { margin-top:auto; padding:10px; border:none; border-radius:6px; background:#1b8f4d; color:#fff; cursor:pointer; font-size:14px; }
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+  padding:15px;
+}
+.card{
+  background:#fff;
+  padding:10px;
+  border-radius:10px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+}
+.card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:8px;
+  cursor:pointer;
+}
+.card p{margin:6px 0;font-size:14px}
+.price{color:green;font-weight:bold}
+.order-btn{
+  margin-top:auto;
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  background:#1b8f4d;
+  color:#fff;
+}
 
-/* SOLD OUT */
-.sold-badge { position:absolute; top:10px; left:10px; background:red; color:#fff; padding:5px 8px; border-radius:6px; font-size:12px; }
-.sold-img { filter:grayscale(100%); cursor:not-allowed; }
-.sold-btn { background:#aaa!important; cursor:not-allowed; }
+/* SOLD */
+.sold-badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:red;
+  color:#fff;
+  padding:5px 8px;
+  border-radius:6px;
+  font-size:12px;
+}
+.sold-img{filter:grayscale(100%)}
+.sold-btn{background:#aaa!important}
 
-/* MODALS */
-.modal { display:none; position:fixed; inset:0; justify-content:center; align-items:center; padding:15px; z-index:1000; overflow:auto; }
-#orderModal form, #imageModal { background:#1b8f4d; color:#fff; padding:20px; width:100%; max-width:420px; border-radius:14px; display:flex; flex-direction:column; }
-#orderModal input, #orderModal textarea, #orderModal button, #imageModal button, #orderModal select { width:100%; margin:6px 0; padding:10px; border:none; border-radius:6px; font-size:14px; }
-.cancel-btn { background:#fff; color:#333; cursor:pointer; }
-#imageModal { background:rgba(0,0,0,.8); align-items:center; cursor:pointer; }
-#imageModal img { max-width:90%; max-height:60vh; border-radius:10px; }
-#imageModal .img-info { color:#fff; text-align:center; margin:10px; font-size:14px; }
+/* IMAGE MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+.image-box{
+  text-align:center;
+  color:#fff;
+}
+.image-box img{
+  max-width:90%;
+  max-height:60vh;
+  border-radius:10px;
+}
+.image-box button{
+  margin-top:10px;
+  padding:10px 15px;
+  border:none;
+  border-radius:6px;
+  background:#1b8f4d;
+  color:#fff;
+}
+
+/* ORDER MODAL */
+#orderModal form{
+  background:#1b8f4d;
+  color:#fff;
+  padding:20px;
+  width:90%;
+  max-width:420px;
+  border-radius:14px;
+}
+#orderModal input,
+#orderModal textarea,
+#orderModal select,
+#orderModal button{
+  width:100%;
+  margin:6px 0;
+  padding:10px;
+  border:none;
+  border-radius:6px;
+}
+.cancel-btn{
+  background:#fff;
+  color:#000;
+}
 
 /* FOOTER */
-.footer { position:fixed; bottom:0; width:100%; background:#1b8f4d; color:#fff; display:flex; flex-direction:column; align-items:center; padding:10px; font-size:14px; }
-.footer a { color:#fff; text-decoration:none; font-weight:bold; }
-.footer .whatsapp-btn { background:#25D366; color:#fff; padding:10px 15px; border-radius:50px; text-decoration:none; margin-top:5px; display:flex; align-items:center; gap:5px; }
+.footer{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:#1b8f4d;
+  color:#fff;
+  text-align:center;
+  padding:10px;
+}
 
-/* RESPONSIVE GRID */
-@media (min-width:768px) { .product-grid { grid-template-columns:repeat(3,1fr); } }
-@media (min-width:1024px) { .product-grid { grid-template-columns:repeat(4,1fr); } }
-
-/* MOBILE SPECIFIC */
-@media (max-width:480px) {
-  .header { flex-direction:column; }
-  .search-input { flex:1 1 100%; margin-bottom:5px; }
-  .search-btn { flex:1 1 100%; }
-  .card img { height:120px; }
-  .order-btn { padding:8px; font-size:13px; }
-  #orderModal form, #imageModal { padding:15px; max-width:90%; }
-  #imageModal img { max-width:95%; max-height:50vh; }
-  .footer { font-size:13px; padding:8px; }
+/* MOBILE */
+@media(max-width:480px){
+  .card img{height:120px}
 }
 </style>
 </head>
+
 <body>
 
 <header class="header">
@@ -68,12 +163,17 @@ body { margin:0; font-family:Arial,sans-serif; background:#f2f2f2; padding-botto
 <button class="search-btn" id="searchBtn">Search</button>
 </header>
 
-<main class="product-grid" id="productGrid">
-<!-- Products generated dynamically -->
-</main>
+<main class="product-grid" id="productGrid"></main>
 
 <!-- IMAGE MODAL -->
-
+<div id="imageModal" class="modal">
+  <div class="image-box">
+    <img id="modalImg">
+    <h3 id="modalTitle"></h3>
+    <p id="modalPrice"></p>
+    <button id="modalOrderBtn">Order Now</button>
+  </div>
+</div>
 
 <!-- ORDER MODAL -->
 <div id="orderModal" class="modal">
@@ -84,128 +184,121 @@ body { margin:0; font-family:Arial,sans-serif; background:#f2f2f2; padding-botto
 <input name="product" id="productName" readonly>
 <input name="price" id="productPrice" readonly>
 
-<label for="payment">Payment Method:</label>
-<select name="payment" id="payment" required>
-  <option value="cod">Cash on Delivery</option>
-  <option value="online">Online Payment on Delivery</option>
+<select name="payment" required>
+<option value="cod">Cash on Delivery</option>
+<option value="online">Online Payment on Delivery</option>
 </select>
 
 <input name="quantity" type="number" placeholder="Quantity" required>
 <textarea name="address" placeholder="Address / Notes"></textarea>
 <input name="contact" placeholder="Contact" required>
+
 <button type="submit">Confirm Order</button>
-<p style="text-align: center;">You must pay advance only for Jersey.</p>
 <button type="button" class="cancel-btn" id="closeModal">Cancel</button>
 </form>
 </div>
 
-<div class="footer">
-<p>Powered by <a href="#">Anveshan</a></p>
-</div>
+<div class="footer">Powered by <b>Anveshan</b></div>
 
 <script>
-// PRODUCTS LIST
-const products = [
-  {name:"A Quiet Light", price:449, img:"b1.jpg", stock:1},
-  {name:"Words Left In My Notes", price:449, img:"bb2.png", stock:1},
-  {name:"Tws Airpod", price:600, img:"tws.jpg", stock:1},
-  {name:"Photo Light Clip", price:500, img:"photo light clip.jpg", stock:1},
-  {name:"RGB Mouse", price:350, img:"RGB MOUSE.jpg", stock:1},
-  {name:"RGB Keyboard", price:900, img:"rgb.jpg", stock:1},
-  {name:"Trimmer", price:400, img:"trimmer.jpg", stock:1},
-  {name:"Mini USB Hub", price:450, img:"usb.jpg", stock:1},
-  {name:"Barcelona jersy", price:900, img:"barca jersy.jpg", stock:0},
-  {name:"Barcelona old jersy", price:900, img:"barca old jers.jpg", stock:0},
-  {name:"Barcelona Jersy", price:900, img:"Barcelona.jpg", stock:0},
-  {name:"Argentina Old Jersy", price:900, img:"argentina old jersy.jpg", stock:0},
-  {name:"Manchaster United Red Jersy", price:900, img:"manchaster.jpg", stock:0},
-  {name:"Manchaster United Jersy", price:900, img:"manchester.jpg", stock:0},
-  {name:"Realmadrid Jersy", price:900, img:"real madrid jersy.jpg", stock:0},
-  {name:"CSK Jersy", price:900, img:"csk jersy.jpg", stock:0},
-  {name:"Mumbai Indian Jersy", price:900, img:"Mi jersy.jpg", stock:0},
-  {name:"Yellow Jersy", price:900, img:"yellow jersy.jpg", stock:0},
-  {name:"White and Red Jersy", price:900, img:"white and red jersy.jpg", stock:0},
+const products=[
+{name:"A Quiet Light",price:449,img:"b1.jpg",stock:1},
+{name:"Words Left In My Notes",price:449,img:"bb2.png",stock:1},
+{name:"Tws Airpod",price:600,img:"tws.jpg",stock:1},
+{name:"Photo Light Clip",price:500,img:"photo light clip.jpg",stock:1},
+{name:"RGB Mouse",price:350,img:"RGB MOUSE.jpg",stock:1},
+{name:"RGB Keyboard",price:900,img:"rgb.jpg",stock:1},
+{name:"Trimmer",price:400,img:"trimmer.jpg",stock:1},
+{name:"Mini USB Hub",price:450,img:"usb.jpg",stock:1},
+
+{name:"Barcelona Jersey",price:900,img:"barca jersy.jpg",stock:0},
+{name:"Barcelona Old Jersey",price:900,img:"barca old jers.jpg",stock:0},
+{name:"Barcelona Jersey Alt",price:900,img:"Barcelona.jpg",stock:0},
+{name:"Argentina Old Jersey",price:900,img:"argentina old jersy.jpg",stock:0},
+{name:"Manchester United Red Jersey",price:900,img:"manchaster.jpg",stock:0},
+{name:"Manchester United Jersey",price:900,img:"manchester.jpg",stock:0},
+{name:"Real Madrid Jersey",price:900,img:"real madrid jersy.jpg",stock:0},
+{name:"CSK Jersey",price:900,img:"csk jersy.jpg",stock:0},
+{name:"Mumbai Indians Jersey",price:900,img:"Mi jersy.jpg",stock:0},
+{name:"Yellow Jersey",price:900,img:"yellow jersy.jpg",stock:0},
+{name:"White and Red Jersey",price:900,img:"white and red jersy.jpg",stock:0}
 ];
 
-// DYNAMIC PRODUCT GENERATION
-const grid = document.getElementById("productGrid");
+const grid=document.getElementById("productGrid");
+
 products.forEach(p=>{
-  const card=document.createElement("div");
-  card.className="card";
-  card.dataset.stock=p.stock;
-  let html=`<img src="${p.img}" ${p.stock===0?'class="sold-img"':''}>
-  ${p.stock===0?'<span class="sold-badge">SOLD OUT</span>':''}
-  <p>${p.name}</p>
-  <p class="price">Rs. ${p.price}</p>
-  <button class="order-btn" ${p.stock===0?'disabled class="sold-btn"':''} data-product="${p.name}" data-price="${p.price}">
-  ${p.stock===0?'Sold Out':'Order Now'}</button>`;
-  card.innerHTML=html;
-  grid.appendChild(card);
+  const c=document.createElement("div");
+  c.className="card";
+  c.innerHTML=`
+    <img src="${p.img}" class="${p.stock?"" :"sold-img"}">
+    ${p.stock?"" :'<span class="sold-badge">SOLD OUT</span>'}
+    <p>${p.name}</p>
+    <p class="price">Rs. ${p.price}</p>
+    <button class="order-btn ${p.stock?"" :"sold-btn"}" ${p.stock?"":"disabled"}>
+      ${p.stock?"Order Now":"Sold Out"}
+    </button>
+  `;
+  grid.appendChild(c);
+
+  const img=c.querySelector("img");
+  const btn=c.querySelector("button");
+
+  img.onclick=()=>openImage(p);
+  if(p.stock) btn.onclick=()=>openOrder(p);
 });
 
-// MODALS & ORDERS
-const modal=document.getElementById("orderModal");
-const imgModal=document.getElementById("imageModal");
+/* IMAGE MODAL */
+const imageModal=document.getElementById("imageModal");
+const modalImg=document.getElementById("modalImg");
+const modalTitle=document.getElementById("modalTitle");
+const modalPrice=document.getElementById("modalPrice");
+const modalOrderBtn=document.getElementById("modalOrderBtn");
+
+function openImage(p){
+  modalImg.src=p.img;
+  modalTitle.textContent=p.name;
+  modalPrice.textContent="Rs. "+p.price;
+  modalOrderBtn.style.display=p.stock?"block":"none";
+  modalOrderBtn.onclick=()=>{imageModal.style.display="none";openOrder(p)};
+  imageModal.style.display="flex";
+}
+imageModal.onclick=e=>{if(e.target===imageModal)imageModal.style.display="none"};
+
+/* ORDER MODAL */
+const orderModal=document.getElementById("orderModal");
 const productName=document.getElementById("productName");
 const productPrice=document.getElementById("productPrice");
 
-document.querySelectorAll(".card").forEach(card=>{
-  const stock=card.dataset.stock,img=card.querySelector("img"),btn=card.querySelector(".order-btn");
-  if(stock==="1"){
-    btn.addEventListener("click",()=>openOrder(btn));
-    img.addEventListener("click",()=>openImage(card,btn));
-  }
-});
-
-function openOrder(btn){
-  productName.value=btn.dataset.product;
-  productPrice.value="Rs. "+btn.dataset.price;
-  modal.style.display="flex";
+function openOrder(p){
+  productName.value=p.name;
+  productPrice.value="Rs. "+p.price;
+  orderModal.style.display="flex";
 }
+closeModal.onclick=()=>orderModal.style.display="none";
 
-function openImage(card,btn){
-  document.getElementById("modalImg").src=card.querySelector("img").src;
-  document.getElementById("modalTitle").textContent=btn.dataset.product;
-  document.getElementById("modalPrice").textContent="Rs. "+btn.dataset.price;
-  imgModal.style.display="flex";
-  document.getElementById("modalOrderBtn").onclick=()=>{imgModal.style.display="none"; openOrder(btn);}
-}
-
-document.getElementById("closeModal").onclick=()=>modal.style.display="none";
-imgModal.onclick=e=>{if(e.target===imgModal)imgModal.style.display="none";}
-
-// FORM SUBMISSION - redirect to WhatsApp
-document.getElementById("orderForm").addEventListener("submit", e => {
+/* FORM */
+orderForm.onsubmit=e=>{
   e.preventDefault();
-  const form = e.target;
-  const name = encodeURIComponent(form.name.value);
-  const email = encodeURIComponent(form.email.value);
-  const product = encodeURIComponent(form.product.value);
-  const price = encodeURIComponent(form.price.value);
-  const quantity = encodeURIComponent(form.quantity.value);
-  const address = encodeURIComponent(form.address.value);
-  const contact = encodeURIComponent(form.contact.value);
-  const payment = encodeURIComponent(form.payment.value);
+  const f=e.target;
+  const msg=`Order Details:
+${f.product.value}
+${f.price.value}
+Qty: ${f.quantity.value}
+Contact: ${f.contact.value}`;
+  window.open("https://wa.me/9779761120781?text="+encodeURIComponent(msg));
+  orderModal.style.display="none";
+  f.reset();
+};
 
-  const waMessage = `Hello! I want to place an order:\n\n\tName:\t ${name}\nEmail: \t${email}\n\tProduct: \t${product}\n\tPrice: \t${price}\n\tQuantity: \t${quantity}\n\tPayment Method: \t${payment}\n\tAddress/Notes: \t${address}\nContact: ${contact}`;
-  const waURL = `https://wa.me/9779761120781?text=${waMessage}`;
-  window.open(waURL, "_blank");
-
-  form.reset();
-  modal.style.display = "none";
-});
-
-// SEARCH
-const searchInput=document.getElementById("searchInput");
-document.getElementById("searchBtn").onclick=()=>{searchProducts();}
-searchInput.addEventListener("keyup",searchProducts);
-
+/* SEARCH */
 function searchProducts(){
   const v=searchInput.value.toLowerCase();
   document.querySelectorAll(".card").forEach(c=>{
     c.style.display=c.innerText.toLowerCase().includes(v)?"flex":"none";
   });
 }
+searchBtn.onclick=searchProducts;
+searchInput.onkeyup=searchProducts;
 </script>
 
 </body>
