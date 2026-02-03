@@ -82,17 +82,16 @@ body { margin:0; font-family:Arial,sans-serif; background:#f2f2f2; padding-botto
 <label for="payment">Payment Method:</label>
 <select name="payment" id="payment" required>
   <option value="cod">Cash on Delivery</option>
-  <option value="online">Online Payment</option>
+  <option value="online">Online Payment on Delivery</option>
 </select>
 
 <input name="quantity" type="number" placeholder="Quantity" required>
 <textarea name="address" placeholder="Address / Notes"></textarea>
 <input name="contact" placeholder="Contact" required>
 <button type="submit">Confirm Order</button>
-<p style="text-align: center;">If you have Order Our Product<br> Contact us on WhatsApp for More Information</p>
+<p style="text-align: center;"> You must be paid Advance only for Jersy.</p>
 <div class="w3-display-middle" style="white-space:nowrap;">
-<button><a href="https://wa.me/9779761120781" class="w3-button w3-light-grey w3-block">
- Click Here.</a></button></div>
+
 <button type="button" class="cancel-btn" id="closeModal">Cancel</button>
 </form>
 </div>
@@ -104,7 +103,7 @@ body { margin:0; font-family:Arial,sans-serif; background:#f2f2f2; padding-botto
 <script>
 // PRODUCTS LIST
 const products = [
-  {name:"A Quiet Light", price:449, img:"b1.jpg", stock:0},
+  {name:"A Quiet Light", price:449, img:"b1.jpg", stock:1},
   {name:"Words Left In My Notes", price:449, img:"bb2.png", stock:1},
   {name:"Tws Airpod", price:600, img:"tws.jpg", stock:1},
   {name:"Photo Light Clip", price:500, img:"photo light clip.jpg", stock:1},
@@ -172,24 +171,29 @@ function openImage(card,btn){
 document.getElementById("closeModal").onclick=()=>modal.style.display="none";
 imgModal.onclick=e=>{if(e.target===imgModal)imgModal.style.display="none";}
 
-// FORM SUBMISSION
-document.getElementById("orderForm").addEventListener("submit",e=>{
+// FORM SUBMISSION - redirect to WhatsApp
+document.getElementById("orderForm").addEventListener("submit", e => {
   e.preventDefault();
-  
-  const form = e.target;
-  const name = form.name.value;
-  const email = form.email.value;
-  const product = form.product.value;
-  const price = form.price.value;
-  const quantity = form.quantity.value;
-  const address = form.address.value;
-  const contact = form.contact.value;
-  const payment = form.payment.value; // COD or Online
 
-  alert(`✅ Order placed successfully!\n\nProduct: ${product}\nPrice: ${price}\nQuantity: ${quantity}\nPayment Method: ${payment.toUpperCase()}`);
-  
+  const form = e.target;
+  const name = encodeURIComponent(form.name.value);
+  const email = encodeURIComponent(form.email.value);
+  const product = encodeURIComponent(form.product.value);
+  const price = encodeURIComponent(form.price.value);
+  const quantity = encodeURIComponent(form.quantity.value);
+  const address = encodeURIComponent(form.address.value);
+  const contact = encodeURIComponent(form.contact.value);
+  const payment = encodeURIComponent(form.payment.value);
+
+  // WhatsApp URL with pre-filled message
+  const waMessage = `Hello! I want to place an order:\n\nName: ${name}\nEmail: ${email}\nProduct: ${product}\nPrice: ${price}\nQuantity: ${quantity}\nPayment Method: ${payment}\nAddress/Notes: ${address}\nContact: ${contact}`;
+  const waURL = `https://wa.me/9779761120781?text=${waMessage}`;
+
+  // Open WhatsApp in a new tab
+  window.open(waURL, "_blank");
+
   form.reset();
-  modal.style.display="none";
+  modal.style.display = "none";
 });
 
 // SEARCH
