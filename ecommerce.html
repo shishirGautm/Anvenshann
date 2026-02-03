@@ -32,7 +32,7 @@ body { margin:0; font-family:Arial,sans-serif; background:#f2f2f2; padding-botto
 /* MODALS */
 .modal { display:none; position:fixed; inset:0; justify-content:center; align-items:center; padding:15px; z-index:1000; }
 #orderModal form, #imageModal { background:#1b8f4d; color:#fff; padding:20px; width:100%; max-width:420px; border-radius:14px; display:flex; flex-direction:column; }
-#orderModal input, #orderModal textarea, #orderModal button, #imageModal button { width:100%; margin:6px 0; padding:10px; border:none; border-radius:6px; }
+#orderModal input, #orderModal textarea, #orderModal button, #imageModal button, #orderModal select { width:100%; margin:6px 0; padding:10px; border:none; border-radius:6px; }
 .cancel-btn { background:#fff; color:#333; cursor:pointer; }
 #imageModal { background:rgba(0,0,0,.8); align-items:center; cursor:pointer; }
 #imageModal img { max-width:80%; max-height:60vh; border-radius:10px; }
@@ -77,13 +77,21 @@ body { margin:0; font-family:Arial,sans-serif; background:#f2f2f2; padding-botto
 <input name="email" type="email" placeholder="Your Email" required>
 <input name="product" id="productName" readonly>
 <input name="price" id="productPrice" readonly>
+
+<!-- Payment Method -->
+<label for="payment">Payment Method:</label>
+<select name="payment" id="payment" required>
+  <option value="cod">Cash on Delivery</option>
+  <option value="online">Online Payment</option>
+</select>
+
 <input name="quantity" type="number" placeholder="Quantity" required>
 <textarea name="address" placeholder="Address / Notes"></textarea>
 <input name="contact" placeholder="Contact" required>
 <button type="submit">Confirm Order</button>
 <p style="text-align: center;">If you have Order Our Product<br> Contact us on WhatsApp for More Information</p>
- <div class="w3-display-middle" style="white-space:nowrap;">
-<button><a  href="https://wa.me/9779761120781" class="w3-button w3-light-grey w3-block">
+<div class="w3-display-middle" style="white-space:nowrap;">
+<button><a href="https://wa.me/9779761120781" class="w3-button w3-light-grey w3-block">
  Click Here.</a></button></div>
 <button type="button" class="cancel-btn" id="closeModal">Cancel</button>
 </form>
@@ -167,8 +175,20 @@ imgModal.onclick=e=>{if(e.target===imgModal)imgModal.style.display="none";}
 // FORM SUBMISSION
 document.getElementById("orderForm").addEventListener("submit",e=>{
   e.preventDefault();
-  alert("✅ Order placed successfully!");
-  e.target.reset();
+  
+  const form = e.target;
+  const name = form.name.value;
+  const email = form.email.value;
+  const product = form.product.value;
+  const price = form.price.value;
+  const quantity = form.quantity.value;
+  const address = form.address.value;
+  const contact = form.contact.value;
+  const payment = form.payment.value; // COD or Online
+
+  alert(`✅ Order placed successfully!\n\nProduct: ${product}\nPrice: ${price}\nQuantity: ${quantity}\nPayment Method: ${payment.toUpperCase()}`);
+  
+  form.reset();
   modal.style.display="none";
 });
 
