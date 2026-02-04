@@ -189,7 +189,7 @@ body{
 <option value="online">Online Payment on Delivery</option>
 </select>
 
-<input name="quantity" type="number" placeholder="Quantity" required>
+<input name="quantity" type="number" min="1" value="1" required>
 <textarea name="address" placeholder="Address / Notes"></textarea>
 <input name="contact" placeholder="Contact" required>
 
@@ -225,35 +225,38 @@ const products=[
 ];
 
 const grid=document.getElementById("productGrid");
-
-products.forEach(p=>{
-  const c=document.createElement("div");
-  c.className="card";
-  c.innerHTML=`
-    <img src="${p.img}" class="${p.stock?"" :"sold-img"}">
-    ${p.stock?"" :'<span class="sold-badge">SOLD OUT</span>'}
-    <p>${p.name}</p>
-    <p class="price">Rs. ${p.price}</p>
-    <button class="order-btn ${p.stock?"" :"sold-btn"}" ${p.stock?"":"disabled"}>
-      ${p.stock?"Order Now":"Sold Out"}
-    </button>
-  `;
-  grid.appendChild(c);
-
-  const img=c.querySelector("img");
-  const btn=c.querySelector("button");
-
-  img.onclick=()=>openImage(p);
-  if(p.stock) btn.onclick=()=>openOrder(p);
-});
-
-/* IMAGE MODAL */
+const searchInput=document.getElementById("searchInput");
+const searchBtn=document.getElementById("searchBtn");
 const imageModal=document.getElementById("imageModal");
 const modalImg=document.getElementById("modalImg");
 const modalTitle=document.getElementById("modalTitle");
 const modalPrice=document.getElementById("modalPrice");
 const modalOrderBtn=document.getElementById("modalOrderBtn");
+const orderModal=document.getElementById("orderModal");
+const productName=document.getElementById("productName");
+const productPrice=document.getElementById("productPrice");
+const closeModal=document.getElementById("closeModal");
+const orderForm=document.getElementById("orderForm");
 
+/* RENDER PRODUCTS */
+products.forEach(p=>{
+  const c=document.createElement("div");
+  c.className="card";
+  c.innerHTML=`
+    <img src="${p.img}" class="${p.stock?"":"sold-img"}">
+    ${p.stock?"":'<span class="sold-badge">SOLD OUT</span>'}
+    <p>${p.name}</p>
+    <p class="price">Rs. ${p.price}</p>
+    <button class="order-btn ${p.stock?"":"sold-btn"}" ${p.stock?"":"disabled"}>
+      ${p.stock?"Order Now":"Sold Out"}
+    </button>`;
+  grid.appendChild(c);
+
+  c.querySelector("img").onclick=()=>openImage(p);
+  if(p.stock) c.querySelector("button").onclick=()=>openOrder(p);
+});
+
+/* IMAGE MODAL */
 function openImage(p){
   modalImg.src=p.img;
   modalTitle.textContent=p.name;
@@ -265,10 +268,6 @@ function openImage(p){
 imageModal.onclick=e=>{if(e.target===imageModal)imageModal.style.display="none"};
 
 /* ORDER MODAL */
-const orderModal=document.getElementById("orderModal");
-const productName=document.getElementById("productName");
-const productPrice=document.getElementById("productPrice");
-
 function openOrder(p){
   productName.value=p.name;
   productPrice.value="Rs. "+p.price;
