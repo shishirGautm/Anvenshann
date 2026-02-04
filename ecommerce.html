@@ -171,7 +171,9 @@ body{
     <img id="modalImg">
     <h3 id="modalTitle"></h3>
     <p id="modalPrice"></p>
-    <button id="modalOrderBtn">Order Now</button>
+    <button id="modalOrderBtn"> 
+      
+    </button>
   </div>
 </div>
 
@@ -210,7 +212,7 @@ const products=[
 {name:"RGB Keyboard",price:900,img:"rgb.jpg",stock:1},
 {name:"Trimmer",price:400,img:"trimmer.jpg",stock:1},
 {name:"Mini USB Hub",price:450,img:"usb.jpg",stock:1},
-
+{ name:"Canva Pro",price:300,img:"canva.jpg",stock:1},
 {name:"Barcelona Jersey",price:900,img:"barca jersy.jpg",stock:0},
 {name:"Barcelona Old Jersey",price:900,img:"barca old jers.jpg",stock:0},
 {name:"Barcelona Jersey Alt",price:900,img:"Barcelona.jpg",stock:0},
@@ -221,7 +223,7 @@ const products=[
 {name:"CSK Jersey",price:900,img:"csk jersy.jpg",stock:0},
 {name:"Mumbai Indians Jersey",price:900,img:"Mi jersy.jpg",stock:0},
 {name:"Yellow Jersey",price:900,img:"yellow jersy.jpg",stock:0},
-{name:"White and Red Jersey",price:900,img:"white and red jersy.jpg",stock:0}
+{name:"White and Red Jersey",price:900,img:"white and red jersy.jpg",stock:0},
 ];
 
 const grid=document.getElementById("productGrid");
@@ -248,7 +250,7 @@ products.forEach(p=>{
     <p>${p.name}</p>
     <p class="price">Rs. ${p.price}</p>
     <button class="order-btn ${p.stock?"":"sold-btn"}" ${p.stock?"":"disabled"}>
-      ${p.stock?"Order Now":"Sold Out"}
+      ${p.stock?"Buy Now":"Sold Out"}
     </button>`;
   grid.appendChild(c);
 
