@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E-commerce with Comments</title>
+<title>E-Commerce</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-*{box-sizing:border-box;}
+*{box-sizing:border-box}
 body{
   margin:0;
   font-family:Arial,sans-serif;
@@ -18,39 +18,47 @@ body{
 
 /* HEADER */
 .header{
+  background:#1b8f4d;
+  padding:10px;
   display:flex;
   gap:8px;
-  padding:10px;
-  background:#1b8f4d;
-  flex-wrap:wrap;
 }
-.search-input{
+.header input{
   flex:1;
   padding:10px;
   border:none;
   border-radius:6px;
 }
-.search-btn{
-  padding:10px;
+.header button{
+  padding:10px 14px;
   border:none;
   border-radius:6px;
   background:#fff;
-  color:#1b8f4d;
   font-weight:bold;
   cursor:pointer;
 }
 
-/* PRODUCTS */
-.product-grid{
+/* PRODUCT GRID */
+.products{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:15px;
   padding:15px;
 }
+
+/* MOBILE → ALWAYS 2 PER ROW */
+@media(max-width:600px){
+  .products{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+}
+
+/* PRODUCT CARD */
 .card{
   background:#fff;
-  padding:10px;
   border-radius:10px;
+  padding:10px;
   display:flex;
   flex-direction:column;
   position:relative;
@@ -60,86 +68,73 @@ body{
   height:150px;
   object-fit:cover;
   border-radius:8px;
-  cursor:pointer;
 }
-.card p{margin:6px 0;font-size:14px;}
-.price{color:green;font-weight:bold;}
-.order-btn{
-  margin-top:auto;
-  padding:10px;
+@media(max-width:600px){
+  .card img{height:120px;}
+}
+
+.card h4{
+  margin:6px 0;
+  font-size:14px;
+}
+.price{
+  color:green;
+  font-weight:bold;
+}
+.card button{
+  padding:8px;
   border:none;
   border-radius:6px;
   background:#1b8f4d;
   color:#fff;
   cursor:pointer;
 }
-
-/* SOLD */
-.sold-badge{
+.sold{
+  background:#999!important;
+  cursor:not-allowed;
+}
+.badge{
   position:absolute;
-  top:10px;
-  left:10px;
+  top:8px;
+  left:8px;
   background:red;
   color:#fff;
-  padding:5px 8px;
-  border-radius:6px;
+  padding:4px 6px;
   font-size:12px;
+  border-radius:6px;
 }
-.sold-img{filter:grayscale(100%)}
-.sold-btn{background:#aaa!important;cursor:not-allowed;}
 
-/* COMMENT SECTION */
-.comment-section{
-  text-align:left;
-  margin-top:10px;
-  border-top:1px solid #ccc;
-  padding-top:8px;
-}
-.comment-section h4{
-  font-size:14px;
-  margin-bottom:6px;
+/* COMMENTS */
+.comments{
+  margin-top:8px;
+  border-top:1px solid #ddd;
+  padding-top:6px;
 }
 .comment{
+  display:flex;
+  gap:6px;
+  padding:4px 0;
   border-bottom:1px solid #eee;
-  margin-bottom:6px;
-  padding-bottom:6px;
-  display:flex;
-  align-items:center;
+  font-size:13px;
 }
-.comment img{
-  max-width:50px;
-  max-height:50px;
-  margin-left:8px;
-  border-radius:6px;
-  object-fit:cover;
-}
-
-/* COMMENT INPUT */
-.comment-input{
+.comment-form{
   display:flex;
-  flex-wrap:wrap;
   gap:6px;
   margin-top:6px;
 }
-.comment-input input[type="text"]{
+.comment-form input{
   flex:1;
   padding:6px;
-  border-radius:6px;
-  border:1px solid #ccc;
 }
-.comment-input input[type="file"]{
-  padding:6px;
-}
-.comment-input button{
-  padding:6px 12px;
-  border:none;
-  border-radius:6px;
+.comment-form button{
+  padding:6px 10px;
   background:#1b8f4d;
   color:#fff;
-  cursor:pointer;
+  border:none;
+  border-radius:6px;
 }
 
-/* MODALS */
+/* MODAL */
 .modal{
   display:none;
   position:fixed;
@@ -147,52 +142,31 @@ body{
   background:rgba(0,0,0,.85);
   justify-content:center;
   align-items:center;
-  z-index:1000;
+  z-index:999;
 }
-
-/* IMAGE MODAL */
-.image-box{
-  text-align:center;
-  color:#fff;
-  max-width:90%;
-}
-.image-box img{
-  max-width:100%;
-  max-height:60vh;
-  border-radius:10px;
-}
-.image-box button{
-  margin-top:10px;
-  padding:10px 15px;
-  border:none;
-  border-radius:6px;
+.modal-content{
   background:#1b8f4d;
-  color:#fff;
-  cursor:pointer;
-}
-
-/* ORDER MODAL */
-#orderModal form{
-  background:#1b8f4d;
-  color:#fff;
   padding:20px;
   width:90%;
   max-width:420px;
   border-radius:14px;
+  color:#fff;
 }
-#orderModal input,
-#orderModal textarea,
-#orderModal select,
-#orderModal button{
+.modal-content input,
+.modal-content textarea,
+.modal-content select{
   width:100%;
-  margin:6px 0;
   padding:10px;
+  margin:6px 0;
   border:none;
   border-radius:6px;
 }
-.cancel-btn{
-  background:#fff;
-  color:#000;
+.modal-content button{
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+  border:none;
+  border-radius:6px;
   cursor:pointer;
 }
 
@@ -206,69 +180,44 @@ body{
   text-align:center;
   padding:10px;
 }
-
-/* RESPONSIVE */
-@media(max-width:480px){
-  .card img{height:120px;}
-  .comment img{max-width:40px; max-height:40px;}
-  .comment-input{flex-direction:column;}
-  .comment-input button{width:100%;}
-}
 </style>
 </head>
 
 <body>
 
-<header class="header">
-  <input class="search-input" id="searchInput" placeholder="Search products">
-  <button class="search-btn" id="searchBtn">Search</button>
-</header>
-
-<main class="product-grid" id="productGrid"></main>
-
-<!-- IMAGE MODAL -->
-<div id="imageModal" class="modal">
-  <div class="image-box">
-    <img id="modalImg">
-    <h3 id="modalTitle"></h3>
-    <p id="modalPrice"></p>
-    <button id="modalOrderBtn">Buy Now</button>
-  </div>
+<div class="header">
+  <input id="search" placeholder="Search product">
+  <button onclick="searchProduct()">Search</button>
 </div>
 
+<div class="products" id="products"></div>
+
 <!-- ORDER MODAL -->
-<div id="orderModal" class="modal">
-<form id="orderForm">
-<h3>Confirm Order</h3>
-
-<input name="name" placeholder="Your Name" required>
-<input name="email" type="email" placeholder="Your Email" required>
-<input name="product" id="productName" readonly>
-<input name="price" id="productPrice" readonly>
-
-<select name="payment" required>
-  <option value="Cash on Delivery">Cash on Delivery</option>
-  <option value="Online Payment on Delivery">Online Payment on Delivery</option>
-</select>
-
-<input name="quantity" type="number" min="1" value="1" required>
-<textarea name="address" placeholder="Address / Notes"></textarea>
-<input name="contact" placeholder="Contact" required>
-
-<button type="submit">Confirm Order</button>
-<button type="button" class="cancel-btn" id="closeModal">Cancel</button>
-</form>
+<div class="modal" id="orderModal">
+  <div class="modal-content">
+    <h3>Confirm Order</h3>
+    <input id="pname" readonly>
+    <input id="pprice" readonly>
+    <input id="buyer" placeholder="Your Name" required>
+    <input id="contact" placeholder="Contact Number" required>
+    <select id="payment">
+      <option>Cash on Delivery</option>
+      <option>Online Payment</option>
+    </select>
+    <textarea id="address" placeholder="Address"></textarea>
+    <button onclick="submitOrder()">Confirm</button>
+    <button onclick="closeModal()" style="background:#fff;color:#000">Cancel</button>
+  </div>
 </div>
 
 <div class="footer">Powered by <b>Anveshan</b></div>
 
 <script>
-/* ===== SETTINGS ===== */
-const WHATSAPP_NUMBER = "9779761120781";
-const FORMSPREE_URL = "https://formspree.io/f/xqeldbro";
+const WHATSAPP="9779761120781";
+const FORMSPREE="https://formspree.io/f/xqeldbro";
 
-/* ===== PRODUCTS ===== */
-const products = [
+/* ✅ ALL PRODUCTS INCLUDED */
+const products=[
  {name:"A Quiet Light",price:449,img:"b1.jpg",stock:1},
  {name:"Words Left In My Notes",price:449,img:"bb2.png",stock:1},
  {name:"Tws Airpod",price:600,img:"tws.jpg",stock:1},
@@ -278,155 +227,104 @@ const products = [
  {name:"Trimmer",price:400,img:"trimmer.jpg",stock:1},
  {name:"Mini USB Hub",price:450,img:"usb.jpg",stock:1},
  {name:"Canva Pro",price:300,img:"canva.jpg",stock:1},
+
  {name:"Barcelona Jersey",price:900,img:"barca jersy.jpg",stock:0},
+ {name:"Barcelona Old Jersey",price:900,img:"barca old jers.jpg",stock:0},
+ {name:"Barcelona Jersey Alt",price:900,img:"Barcelona.jpg",stock:0},
+ {name:"Argentina Old Jersey",price:900,img:"argentina old jersy.jpg",stock:0},
+ {name:"Manchester United Red Jersey",price:900,img:"manchaster.jpg",stock:0},
+ {name:"Manchester United Jersey",price:900,img:"manchester.jpg",stock:0},
+ {name:"Real Madrid Jersey",price:900,img:"real madrid jersy.jpg",stock:0},
+
+ {name:"Gorilla Tripod With Mobile Clips",price:550,img:"gorila.jpeg",stock:1},
+ {name:"Mini Tripod",price:500,img:"tripod.jpeg",stock:1},
+
  {name:"CSK Jersey",price:900,img:"csk jersy.jpg",stock:0},
  {name:"Mumbai Indians Jersey",price:900,img:"Mi jersy.jpg",stock:0},
  {name:"Yellow Jersey",price:900,img:"yellow jersy.jpg",stock:0},
  {name:"White and Red Jersey",price:900,img:"white and red jersy.jpg",stock:0}
 ];
 
-/* ===== ELEMENTS ===== */
-const grid=document.getElementById("productGrid");
-const searchInput=document.getElementById("searchInput");
-const searchBtn=document.getElementById("searchBtn");
-const imageModal=document.getElementById("imageModal");
-const modalImg=document.getElementById("modalImg");
-const modalTitle=document.getElementById("modalTitle");
-const modalPrice=document.getElementById("modalPrice");
-const modalOrderBtn=document.getElementById("modalOrderBtn");
-const orderModal=document.getElementById("orderModal");
-const productName=document.getElementById("productName");
-const productPrice=document.getElementById("productPrice");
-const closeModal=document.getElementById("closeModal");
-const orderForm=document.getElementById("orderForm");
+const box=document.getElementById("products");
+let current=null;
 
-/* ===== RENDER PRODUCTS ===== */
-function renderProducts(){
- grid.innerHTML="";
- products.forEach(p=>{
-  const c=document.createElement("div");
-  c.className="card";
-  c.innerHTML=`
-   <img src="${p.img}" class="${p.stock?"":"sold-img"}">
-   ${p.stock?"":'<span class="sold-badge">SOLD OUT</span>'}
-   <p>${p.name}</p>
-   <p class="price">Rs. ${p.price}</p>
-   <button class="order-btn ${p.stock?"":"sold-btn"}" ${p.stock?"":"disabled"}>
-     ${p.stock?"Buy Now":"Sold Out"}
-   </button>
+function load(){
+  box.innerHTML="";
+  products.forEach(p=>{
+    const d=document.createElement("div");
+    d.className="card";
+    d.innerHTML=`
+      ${p.stock?"":"<span class='badge'>SOLD OUT</span>"}
+      <img src="${p.img}">
+      <h4>${p.name}</h4>
+      <div class="price">Rs. ${p.price}</div>
+      <button class="${p.stock?"":"sold"}" ${p.stock?"":"disabled"}
+        onclick="order('${p.name}',${p.price})">
+        ${p.stock?"Buy Now":"Sold Out"}
+      </button>
 
-   <div class="comment-section">
-     <h4>Comments:</h4>
-     <div class="comment-list"></div>
-     <div class="comment-input">
-       <input type="text" placeholder="Write a comment">
-       <input type="file" accept="image/*">
-       <button>Add</button>
-     </div>
-   </div>
-  `;
-  grid.appendChild(c);
+      <div class="comments">
+        <div class="comment-list"></div>
+        <div class="comment-form">
+          <input type="text" placeholder="Comment">
+          <button>Add</button>
+        </div>
+      </div>
+    `;
+    box.appendChild(d);
 
-  c.querySelector("img").onclick=()=>openImage(p);
-  if(p.stock) c.querySelector("button").onclick=()=>openOrder(p);
+    d.querySelector(".comment-form button").onclick=()=>{
+      const input=d.querySelector(".comment-form input");
+      if(!input.value.trim()) return;
+      const c=document.createElement("div");
+      c.className="comment";
+      c.textContent=input.value;
+      d.querySelector(".comment-list").appendChild(c);
+      input.value="";
+    };
+  });
+}
+load();
 
-  /* COMMENT FUNCTIONALITY */
-  const commentInput = c.querySelector(".comment-input input[type='text']");
-  const fileInput = c.querySelector(".comment-input input[type='file']");
-  const addBtn = c.querySelector(".comment-input button");
-  const commentList = c.querySelector(".comment-list");
+function order(n,p){
+  current={n,p};
+  pname.value=n;
+  pprice.value="Rs. "+p;
+  orderModal.style.display="flex";
+}
+function closeModal(){
+  orderModal.style.display="none";
+}
 
-  addBtn.onclick = () => {
-    if(commentInput.value.trim() === "") return;
-    const div = document.createElement("div");
-    div.className = "comment";
-    div.innerHTML = `<strong>${commentInput.value}</strong>`;
-    if(fileInput.files[0]){
-      const img = document.createElement("img");
-      img.src = URL.createObjectURL(fileInput.files[0]);
-      div.appendChild(img);
+function submitOrder(){
+  const msg=`New Order
+Product: ${current.n}
+Price: Rs.${current.p}
+Name: ${buyer.value}
+Contact: ${contact.value}
+Address: ${address.value}
+Payment: ${payment.value}`;
+
+  const w=window.open(
+    "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg),
+    "_blank"
+  );
+
+  setTimeout(()=>{
+    if(!w || w.closed){
+      fetch(FORMSPREE,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({msg})
+      });
+      alert("Order submitted");
     }
-    commentList.appendChild(div);
-    commentInput.value = "";
-    fileInput.value = "";
-  };
- });
+  },1200);
+
+  closeModal();
 }
-renderProducts();
 
-/* ===== IMAGE MODAL ===== */
-function openImage(p){
- modalImg.src=p.img;
- modalTitle.textContent=p.name;
- modalPrice.textContent="Rs. "+p.price;
- modalOrderBtn.style.display=p.stock?"block":"none";
- modalOrderBtn.onclick=()=>{imageModal.style.display="none";openOrder(p)};
- imageModal.style.display="flex";
-}
-imageModal.onclick=e=>{if(e.target===imageModal)imageModal.style.display="none"};
 
-/* ===== ORDER MODAL ===== */
-function openOrder(p){
- productName.value=p.name;
- productPrice.value="Rs. "+p.price;
- orderModal.style.display="flex";
-}
-closeModal.onclick=()=>orderModal.style.display="none";
-
-/* ===== SUBMIT (WHATSAPP → FORMSPREE FALLBACK) ===== */
-orderForm.onsubmit=e=>{
- e.preventDefault();
- const f=e.target;
-
- const data={
-  name:f.name.value,
-  email:f.email.value,
-  product:f.product.value,
-  price:f.price.value,
-  quantity:f.quantity.value,
-  payment:f.payment.value,
-  address:f.address.value,
-  contact:f.contact.value
- };
-
- const msg=
-`New Order
-Name: ${data.name}
-Product: ${data.product}
-Price: ${data.price}
-Qty: ${data.quantity}
-Payment: ${data.payment}
-Contact: ${data.contact}
-Address: ${data.address}`;
-
- const wa=window.open(
-  "https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(msg),
-  "_blank"
- );
-
- setTimeout(()=>{
-  if(!wa || wa.closed){
-   fetch(FORMSPREE_URL,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(data)
-   }).then(()=>alert("Order submitted successfully!"));
-  }
- },1200);
-
- orderModal.style.display="none";
- f.reset();
-};
-
-/* ===== SEARCH ===== */
-function searchProducts(){
- const v=searchInput.value.toLowerCase();
- document.querySelectorAll(".card").forEach(c=>{
-  c.style.display=c.innerText.toLowerCase().includes(v)?"flex":"none";
- });
-}
-searchBtn.onclick=searchProducts;
-searchInput.onkeyup=searchProducts;
 </script>
 
 </body>
