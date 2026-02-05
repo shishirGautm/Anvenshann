@@ -8,199 +8,162 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background: #f2f2f2;
-  padding-bottom: 140px; /* footer space */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f2f2f2;
+  padding-bottom:120px;
 }
 
 /* HEADER */
-.header {
-  background: #1b8f4d;
-  padding: 10px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+.header{
+  background:#1b8f4d;
+  padding:10px;
+  display:flex;
+  gap:8px;
 }
-.header input {
-  flex: 1 1 200px;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
+.header input{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:6px;
 }
-.header button {
-  padding: 10px 14px;
-  border: none;
-  border-radius: 6px;
-  background: #fff;
-  font-weight: bold;
-  cursor: pointer;
+.header button{
+  padding:10px 14px;
+  border:none;
+  border-radius:6px;
+  background:#fff;
+  font-weight:bold;
 }
 
 /* PRODUCT GRID */
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-  padding: 15px;
+.products{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  padding:15px;
 }
 
-/* PRODUCT CARD */
-.card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  transition: transform 0.2s;
-}
-.card:hover {
-  transform: scale(1.02);
-}
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-.card h4 {
-  margin: 6px 0;
-  font-size: 16px;
-}
-.price {
-  color: green;
-  font-weight: bold;
-}
-.card button {
-  padding: 8px;
-  border: none;
-  border-radius: 6px;
-  background: #1b8f4d;
-  color: #fff;
-  cursor: pointer;
-  margin-top: auto;
-}
-.sold {
-  background: #999 !important;
-  cursor: not-allowed;
-}
-.badge {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background: red;
-  color: #fff;
-  padding: 4px 6px;
-  font-size: 12px;
-  border-radius: 6px;
+/* TABLET */
+@media(max-width:900px){
+  .products{grid-template-columns:repeat(3,1fr);}
 }
 
-/* COMMENTS */
-.comments {
-  margin-top: 8px;
-  border-top: 1px solid #ddd;
-  padding-top: 6px;
-}
-.comment {
-  display: flex;
-  gap: 6px;
-  padding: 4px 0;
-  border-bottom: 1px solid #eee;
-  font-size: 13px;
-}
-.comment-form {
-  display: flex;
-  gap: 6px;
-  margin-top: 6px;
-  flex-wrap: wrap;
-}
-.comment-form input {
-  flex: 1 1 100px;
-  padding: 6px;
-}
-.comment-form button {
-  padding: 6px 10px;
-  background: #1b8f4d;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
+/* MOBILE – ALWAYS 2 PER ROW */
+@media(max-width:600px){
+  .products{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
 }
 
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  padding: 10px;
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:10px;
+  padding:10px;
+  display:flex;
+  flex-direction:column;
+  position:relative;
 }
-.modal-content {
-  background: #1b8f4d;
-  padding: 20px;
-  width: 100%;
-  max-width: 420px;
-  border-radius: 14px;
-  color: #fff;
-  overflow-y: auto;
-  max-height: 90vh;
+.card img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  border-radius:8px;
+  cursor:pointer;
+}
+.card h4{
+  margin:6px 0;
+  font-size:14px;
+}
+.price{
+  color:green;
+  font-weight:bold;
+}
+.card button{
+  margin-top:auto;
+  padding:8px;
+  border:none;
+  border-radius:6px;
+  background:#1b8f4d;
+  color:#fff;
+}
+.sold{
+  background:#999!important;
+}
+.badge{
+  position:absolute;
+  top:8px;
+  left:8px;
+  background:red;
+  color:#fff;
+  padding:4px 6px;
+  font-size:12px;
+  border-radius:6px;
+}
+
+/* TAP TO VIEW MODAL */
+.image-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  z-index:1000;
+  justify-content:center;
+  align-items:center;
+}
+.image-modal img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:10px;
+}
+
+/* ORDER MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  z-index:999;
+  justify-content:center;
+  align-items:center;
+}
+.modal-content{
+  background:#1b8f4d;
+  padding:20px;
+  width:90%;
+  max-width:420px;
+  border-radius:14px;
+  color:#fff;
 }
 .modal-content input,
 .modal-content textarea,
-.modal-content select {
-  width: 100%;
-  padding: 10px;
-  margin: 6px 0;
-  border: none;
-  border-radius: 6px;
+.modal-content select{
+  width:100%;
+  padding:10px;
+  margin:6px 0;
+  border:none;
+  border-radius:6px;
 }
-.modal-content button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+.modal-content button{
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+  border:none;
+  border-radius:6px;
 }
 
 /* FOOTER */
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #1b8f4d;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-  font-size: 14px;
-}
-
-/* RESPONSIVE ADJUSTMENTS */
-@media (max-width: 768px) {
-  .card img {
-    height: 150px;
-  }
-}
-
-@media (max-width: 500px) {
-  .header {
-    flex-direction: column;
-  }
-  .header input, .header button {
-    width: 100%;
-  }
-  .card img {
-    height: 120px;
-  }
+.footer{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:#1b8f4d;
+  color:#fff;
+  text-align:center;
+  padding:10px;
 }
 </style>
 </head>
@@ -208,11 +171,16 @@ body {
 <body>
 
 <div class="header">
-  <input id="search" placeholder="Search product">
-  <button onclick="searchProduct()">Search</button>
+  <input placeholder="Search product">
+  <button>Search</button>
 </div>
 
 <div class="products" id="products"></div>
+
+<!-- IMAGE VIEW -->
+<div class="image-modal" id="imgModal" onclick="closeImage()">
+  <img id="imgView">
+</div>
 
 <!-- ORDER MODAL -->
 <div class="modal" id="orderModal">
@@ -220,15 +188,11 @@ body {
     <h3>Confirm Order</h3>
     <input id="pname" readonly>
     <input id="pprice" readonly>
-    <input id="buyer" placeholder="Your Name" required>
-    <input id="contact" placeholder="Contact Number" required>
-    <select id="payment">
-      <option>Cash on Delivery</option>
-      <option>Online Payment</option>
-    </select>
+    <input id="buyer" placeholder="Your Name">
+    <input id="contact" placeholder="Contact Number">
     <textarea id="address" placeholder="Address"></textarea>
     <button onclick="submitOrder()">Confirm</button>
-    <button onclick="closeModal()" style="background:#fff;color:#000">Cancel</button>
+    <button onclick="closeOrder()" style="background:#fff;color:#000">Cancel</button>
   </div>
 </div>
 
@@ -236,106 +200,64 @@ body {
 
 <script>
 const WHATSAPP="9779761120781";
-const FORMSPREE="https://formspree.io/f/xqeldbro";
 
-/* ✅ ALL PRODUCTS INCLUDED */
 const products=[
  {name:"A Quiet Light",price:449,img:"b1.jpg",stock:1},
  {name:"Words Left In My Notes",price:449,img:"bb2.png",stock:1},
  {name:"Tws Airpod",price:600,img:"tws.jpg",stock:1},
- {name:"Photo Light Clip",price:500,img:"photo light clip.jpg",stock:1},
  {name:"RGB Mouse",price:350,img:"RGB MOUSE.jpg",stock:1},
- {name:"RGB Keyboard",price:900,img:"rgb.jpg",stock:1},
  {name:"Trimmer",price:400,img:"trimmer.jpg",stock:1},
- {name:"Mini USB Hub",price:450,img:"usb.jpg",stock:1},
- {name:"Canva Pro",price:300,img:"canva.jpg",stock:1},
- {name:"Barcelona Jersey",price:900,img:"barca jersy.jpg",stock:0},
- {name:"Barcelona Old Jersey",price:900,img:"barca old jers.jpg",stock:0},
- {name:"Barcelona Jersey Alt",price:900,img:"Barcelona.jpg",stock:0},
- {name:"Argentina Old Jersey",price:900,img:"argentina old jersy.jpg",stock:0},
- {name:"Manchester United Red Jersey",price:900,img:"manchaster.jpg",stock:0},
- {name:"Manchester United Jersey",price:900,img:"manchester.jpg",stock:0},
- {name:"Real Madrid Jersey",price:900,img:"real madrid jersy.jpg",stock:0},
- {name:"Gorilla Tripod With Mobile Clips",price:550,img:"gorila.jpeg",stock:1},
- {name:"Mini Tripod",price:500,img:"tripod.jpeg",stock:1},
- {name:"CSK Jersey",price:900,img:"csk jersy.jpg",stock:0},
- {name:"Mumbai Indians Jersey",price:900,img:"Mi jersy.jpg",stock:0},
- {name:"Yellow Jersey",price:900,img:"yellow jersy.jpg",stock:0},
- {name:"White and Red Jersey",price:900,img:"white and red jersy.jpg",stock:0}
+ {name:"Barcelona Jersey",price:900,img:"barca jersy.jpg",stock:0}
 ];
 
 const box=document.getElementById("products");
 let current=null;
 
-function load(){
-  box.innerHTML="";
-  products.forEach(p=>{
-    const d=document.createElement("div");
-    d.className="card";
-    d.innerHTML=`
-      ${p.stock?"":"<span class='badge'>SOLD OUT</span>"}
-      <img src="${p.img}">
-      <h4>${p.name}</h4>
-      <div class="price">Rs. ${p.price}</div>
-      <button class="${p.stock?"":"sold"}" ${p.stock?"":"disabled"} onclick="order('${p.name}',${p.price})">
-        ${p.stock?"Buy Now":"Sold Out"}
-      </button>
-      <div class="comments">
-        <div class="comment-list"></div>
-        <div class="comment-form">
-          <input type="text" placeholder="Comment">
-          <button>Add</button>
-        </div>
-      </div>
-    `;
-    box.appendChild(d);
+products.forEach(p=>{
+  const d=document.createElement("div");
+  d.className="card";
+  d.innerHTML=`
+    ${p.stock?"":"<span class='badge'>SOLD</span>"}
+    <img src="${p.img}" onclick="viewImage('${p.img}')">
+    <h4>${p.name}</h4>
+    <div class="price">Rs. ${p.price}</div>
+    <button class="${p.stock?"":"sold"}" ${p.stock?"":"disabled"}
+      onclick="order('${p.name}',${p.price})">
+      ${p.stock?"Buy Now":"Sold Out"}
+    </button>
+  `;
+  box.appendChild(d);
+});
 
-    d.querySelector(".comment-form button").onclick=()=>{
-      const input=d.querySelector(".comment-form input");
-      if(!input.value.trim()) return;
-      const c=document.createElement("div");
-      c.className="comment";
-      c.textContent=input.value;
-      d.querySelector(".comment-list").appendChild(c);
-      input.value="";
-    };
-  });
+/* IMAGE VIEW */
+function viewImage(src){
+  imgView.src=src;
+  imgModal.style.display="flex";
 }
-load();
+function closeImage(){
+  imgModal.style.display="none";
+}
 
+/* ORDER */
 function order(n,p){
   current={n,p};
   pname.value=n;
   pprice.value="Rs. "+p;
   orderModal.style.display="flex";
 }
-function closeModal(){
+function closeOrder(){
   orderModal.style.display="none";
 }
-
 function submitOrder(){
-  const msg=`New Order
-Product: ${current.n}
-Price: Rs.${current.p}
-Name: ${buyer.value}
-Contact: ${contact.value}
-Address: ${address.value}
-Payment: ${payment.value}`;
+  const msg=`Order
+${current.n}
+Rs.${current.p}
+${buyer.value}
+${contact.value}
+${address.value}`;
 
-  const w=window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg), "_blank");
-
-  setTimeout(()=>{
-    if(!w || w.closed){
-      fetch(FORMSPREE,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({msg})
-      });
-      alert("Order submitted");
-    }
-  },1200);
-
-  closeModal();
+  window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg),"_blank");
+  closeOrder();
 }
 </script>
 
