@@ -8,177 +8,199 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f2f2f2;
-  padding-bottom:120px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  padding-bottom: 140px; /* footer space */
 }
 
 /* HEADER */
-.header{
-  background:#1b8f4d;
-  padding:10px;
-  display:flex;
-  gap:8px;
+.header {
+  background: #1b8f4d;
+  padding: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
-.header input{
-  flex:1;
-  padding:10px;
-  border:none;
-  border-radius:6px;
+.header input {
+  flex: 1 1 200px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
 }
-.header button{
-  padding:10px 14px;
-  border:none;
-  border-radius:6px;
-  background:#fff;
-  font-weight:bold;
-  cursor:pointer;
+.header button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #fff;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 /* PRODUCT GRID */
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
-  padding:15px;
-}
-
-/* MOBILE → ALWAYS 2 PER ROW */
-@media(max-width:600px){
-  .products{
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-  }
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  padding: 15px;
 }
 
 /* PRODUCT CARD */
-.card{
-  background:#fff;
-  border-radius:10px;
-  padding:10px;
-  display:flex;
-  flex-direction:column;
-  position:relative;
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.2s;
 }
-.card img{
-  width:100%;
-  height:150px;
-  object-fit:cover;
-  border-radius:8px;
+.card:hover {
+  transform: scale(1.02);
 }
-@media(max-width:600px){
-  .card img{height:120px;}
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
 }
-
-.card h4{
-  margin:6px 0;
-  font-size:14px;
+.card h4 {
+  margin: 6px 0;
+  font-size: 16px;
 }
-.price{
-  color:green;
-  font-weight:bold;
+.price {
+  color: green;
+  font-weight: bold;
 }
-.card button{
-  padding:8px;
-  border:none;
-  border-radius:6px;
-  background:#1b8f4d;
-  color:#fff;
-  cursor:pointer;
+.card button {
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  background: #1b8f4d;
+  color: #fff;
+  cursor: pointer;
+  margin-top: auto;
 }
-.sold{
-  background:#999!important;
-  cursor:not-allowed;
+.sold {
+  background: #999 !important;
+  cursor: not-allowed;
 }
-.badge{
-  position:absolute;
-  top:8px;
-  left:8px;
-  background:red;
-  color:#fff;
-  padding:4px 6px;
-  font-size:12px;
-  border-radius:6px;
+.badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: red;
+  color: #fff;
+  padding: 4px 6px;
+  font-size: 12px;
+  border-radius: 6px;
 }
 
 /* COMMENTS */
-.comments{
-  margin-top:8px;
-  border-top:1px solid #ddd;
-  padding-top:6px;
+.comments {
+  margin-top: 8px;
+  border-top: 1px solid #ddd;
+  padding-top: 6px;
 }
-.comment{
-  display:flex;
-  gap:6px;
-  padding:4px 0;
-  border-bottom:1px solid #eee;
-  font-size:13px;
+.comment {
+  display: flex;
+  gap: 6px;
+  padding: 4px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
 }
-.comment-form{
-  display:flex;
-  gap:6px;
-  margin-top:6px;
+.comment-form {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  flex-wrap: wrap;
 }
-.comment-form input{
-  flex:1;
-  padding:6px;
+.comment-form input {
+  flex: 1 1 100px;
+  padding: 6px;
 }
-.comment-form button{
-  padding:6px 10px;
-  background:#1b8f4d;
-  color:#fff;
-  border:none;
-  border-radius:6px;
+.comment-form button {
+  padding: 6px 10px;
+  background: #1b8f4d;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
 }
 
 /* MODAL */
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.85);
-  justify-content:center;
-  align-items:center;
-  z-index:999;
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 10px;
 }
-.modal-content{
-  background:#1b8f4d;
-  padding:20px;
-  width:90%;
-  max-width:420px;
-  border-radius:14px;
-  color:#fff;
+.modal-content {
+  background: #1b8f4d;
+  padding: 20px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 14px;
+  color: #fff;
+  overflow-y: auto;
+  max-height: 90vh;
 }
 .modal-content input,
 .modal-content textarea,
-.modal-content select{
-  width:100%;
-  padding:10px;
-  margin:6px 0;
-  border:none;
-  border-radius:6px;
+.modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border: none;
+  border-radius: 6px;
 }
-.modal-content button{
-  width:100%;
-  padding:10px;
-  margin-top:6px;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
+.modal-content button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 /* FOOTER */
-.footer{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:#1b8f4d;
-  color:#fff;
-  text-align:center;
-  padding:10px;
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #1b8f4d;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 768px) {
+  .card img {
+    height: 150px;
+  }
+}
+
+@media (max-width: 500px) {
+  .header {
+    flex-direction: column;
+  }
+  .header input, .header button {
+    width: 100%;
+  }
+  .card img {
+    height: 120px;
+  }
 }
 </style>
 </head>
@@ -227,7 +249,6 @@ const products=[
  {name:"Trimmer",price:400,img:"trimmer.jpg",stock:1},
  {name:"Mini USB Hub",price:450,img:"usb.jpg",stock:1},
  {name:"Canva Pro",price:300,img:"canva.jpg",stock:1},
-
  {name:"Barcelona Jersey",price:900,img:"barca jersy.jpg",stock:0},
  {name:"Barcelona Old Jersey",price:900,img:"barca old jers.jpg",stock:0},
  {name:"Barcelona Jersey Alt",price:900,img:"Barcelona.jpg",stock:0},
@@ -235,10 +256,8 @@ const products=[
  {name:"Manchester United Red Jersey",price:900,img:"manchaster.jpg",stock:0},
  {name:"Manchester United Jersey",price:900,img:"manchester.jpg",stock:0},
  {name:"Real Madrid Jersey",price:900,img:"real madrid jersy.jpg",stock:0},
-
  {name:"Gorilla Tripod With Mobile Clips",price:550,img:"gorila.jpeg",stock:1},
  {name:"Mini Tripod",price:500,img:"tripod.jpeg",stock:1},
-
  {name:"CSK Jersey",price:900,img:"csk jersy.jpg",stock:0},
  {name:"Mumbai Indians Jersey",price:900,img:"Mi jersy.jpg",stock:0},
  {name:"Yellow Jersey",price:900,img:"yellow jersy.jpg",stock:0},
@@ -258,11 +277,9 @@ function load(){
       <img src="${p.img}">
       <h4>${p.name}</h4>
       <div class="price">Rs. ${p.price}</div>
-      <button class="${p.stock?"":"sold"}" ${p.stock?"":"disabled"}
-        onclick="order('${p.name}',${p.price})">
+      <button class="${p.stock?"":"sold"}" ${p.stock?"":"disabled"} onclick="order('${p.name}',${p.price})">
         ${p.stock?"Buy Now":"Sold Out"}
       </button>
-
       <div class="comments">
         <div class="comment-list"></div>
         <div class="comment-form">
@@ -305,10 +322,7 @@ Contact: ${contact.value}
 Address: ${address.value}
 Payment: ${payment.value}`;
 
-  const w=window.open(
-    "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg),
-    "_blank"
-  );
+  const w=window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg), "_blank");
 
   setTimeout(()=>{
     if(!w || w.closed){
@@ -323,8 +337,6 @@ Payment: ${payment.value}`;
 
   closeModal();
 }
-
-
 </script>
 
 </body>
