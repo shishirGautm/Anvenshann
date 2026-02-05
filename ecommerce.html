@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E-commerce</title>
+<title>E-commerce with Comments</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;}
 body{
   margin:0;
   font-family:Arial,sans-serif;
   background:#f2f2f2;
-  padding-bottom:100px;
+  padding-bottom:120px;
 }
 
 /* HEADER */
@@ -22,6 +22,7 @@ body{
   gap:8px;
   padding:10px;
   background:#1b8f4d;
+  flex-wrap:wrap;
 }
 .search-input{
   flex:1;
@@ -36,12 +37,13 @@ body{
   background:#fff;
   color:#1b8f4d;
   font-weight:bold;
+  cursor:pointer;
 }
 
 /* PRODUCTS */
 .product-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:15px;
   padding:15px;
 }
@@ -49,7 +51,6 @@ body{
   background:#fff;
   padding:10px;
   border-radius:10px;
-  text-align:center;
   display:flex;
   flex-direction:column;
   position:relative;
@@ -61,8 +62,8 @@ body{
   border-radius:8px;
   cursor:pointer;
 }
-.card p{margin:6px 0;font-size:14px}
-.price{color:green;font-weight:bold}
+.card p{margin:6px 0;font-size:14px;}
+.price{color:green;font-weight:bold;}
 .order-btn{
   margin-top:auto;
   padding:10px;
@@ -70,6 +71,7 @@ body{
   border-radius:6px;
   background:#1b8f4d;
   color:#fff;
+  cursor:pointer;
 }
 
 /* SOLD */
@@ -84,7 +86,58 @@ body{
   font-size:12px;
 }
 .sold-img{filter:grayscale(100%)}
-.sold-btn{background:#aaa!important}
+.sold-btn{background:#aaa!important;cursor:not-allowed;}
+
+/* COMMENT SECTION */
+.comment-section{
+  text-align:left;
+  margin-top:10px;
+  border-top:1px solid #ccc;
+  padding-top:8px;
+}
+.comment-section h4{
+  font-size:14px;
+  margin-bottom:6px;
+}
+.comment{
+  border-bottom:1px solid #eee;
+  margin-bottom:6px;
+  padding-bottom:6px;
+  display:flex;
+  align-items:center;
+}
+.comment img{
+  max-width:50px;
+  max-height:50px;
+  margin-left:8px;
+  border-radius:6px;
+  object-fit:cover;
+}
+
+/* COMMENT INPUT */
+.comment-input{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:6px;
+}
+.comment-input input[type="text"]{
+  flex:1;
+  padding:6px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+.comment-input input[type="file"]{
+  padding:6px;
+}
+.comment-input button{
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  background:#1b8f4d;
+  color:#fff;
+  cursor:pointer;
+}
 
 /* MODALS */
 .modal{
@@ -101,9 +154,10 @@ body{
 .image-box{
   text-align:center;
   color:#fff;
+  max-width:90%;
 }
 .image-box img{
-  max-width:90%;
+  max-width:100%;
   max-height:60vh;
   border-radius:10px;
 }
@@ -114,6 +168,7 @@ body{
   border-radius:6px;
   background:#1b8f4d;
   color:#fff;
+  cursor:pointer;
 }
 
 /* ORDER MODAL */
@@ -138,6 +193,7 @@ body{
 .cancel-btn{
   background:#fff;
   color:#000;
+  cursor:pointer;
 }
 
 /* FOOTER */
@@ -149,6 +205,14 @@ body{
   color:#fff;
   text-align:center;
   padding:10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  .card img{height:120px;}
+  .comment img{max-width:40px; max-height:40px;}
+  .comment-input{flex-direction:column;}
+  .comment-input button{width:100%;}
 }
 </style>
 </head>
@@ -203,7 +267,7 @@ body{
 const WHATSAPP_NUMBER = "9779761120781";
 const FORMSPREE_URL = "https://formspree.io/f/xqeldbro";
 
-/* ===== ALL PRODUCTS (NOTHING MISSING) ===== */
+/* ===== PRODUCTS ===== */
 const products = [
  {name:"A Quiet Light",price:449,img:"b1.jpg",stock:1},
  {name:"Words Left In My Notes",price:449,img:"bb2.png",stock:1},
@@ -214,16 +278,7 @@ const products = [
  {name:"Trimmer",price:400,img:"trimmer.jpg",stock:1},
  {name:"Mini USB Hub",price:450,img:"usb.jpg",stock:1},
  {name:"Canva Pro",price:300,img:"canva.jpg",stock:1},
-
  {name:"Barcelona Jersey",price:900,img:"barca jersy.jpg",stock:0},
- {name:"Barcelona Old Jersey",price:900,img:"barca old jers.jpg",stock:0},
- {name:"Barcelona Jersey Alt",price:900,img:"Barcelona.jpg",stock:0},
- {name:"Argentina Old Jersey",price:900,img:"argentina old jersy.jpg",stock:0},
- {name:"Manchester United Red Jersey",price:900,img:"manchaster.jpg",stock:0},
- {name:"Manchester United Jersey",price:900,img:"manchester.jpg",stock:0},
- {name:"Real Madrid Jersey",price:900,img:"real madrid jersy.jpg",stock:0},
- {name:" Gorilla Tripod With Mobile Clips ",price:550,img:"gorila.jpeg",stock:1},
- {name:" Mini Tripod ",price:500,img:"tripod.jpeg",stock:1},
  {name:"CSK Jersey",price:900,img:"csk jersy.jpg",stock:0},
  {name:"Mumbai Indians Jersey",price:900,img:"Mi jersy.jpg",stock:0},
  {name:"Yellow Jersey",price:900,img:"yellow jersy.jpg",stock:0},
@@ -258,11 +313,43 @@ function renderProducts(){
    <p class="price">Rs. ${p.price}</p>
    <button class="order-btn ${p.stock?"":"sold-btn"}" ${p.stock?"":"disabled"}>
      ${p.stock?"Buy Now":"Sold Out"}
-   </button>`;
+   </button>
+
+   <div class="comment-section">
+     <h4>Comments:</h4>
+     <div class="comment-list"></div>
+     <div class="comment-input">
+       <input type="text" placeholder="Write a comment">
+       <input type="file" accept="image/*">
+       <button>Add</button>
+     </div>
+   </div>
+  `;
   grid.appendChild(c);
 
   c.querySelector("img").onclick=()=>openImage(p);
   if(p.stock) c.querySelector("button").onclick=()=>openOrder(p);
+
+  /* COMMENT FUNCTIONALITY */
+  const commentInput = c.querySelector(".comment-input input[type='text']");
+  const fileInput = c.querySelector(".comment-input input[type='file']");
+  const addBtn = c.querySelector(".comment-input button");
+  const commentList = c.querySelector(".comment-list");
+
+  addBtn.onclick = () => {
+    if(commentInput.value.trim() === "") return;
+    const div = document.createElement("div");
+    div.className = "comment";
+    div.innerHTML = `<strong>${commentInput.value}</strong>`;
+    if(fileInput.files[0]){
+      const img = document.createElement("img");
+      img.src = URL.createObjectURL(fileInput.files[0]);
+      div.appendChild(img);
+    }
+    commentList.appendChild(div);
+    commentInput.value = "";
+    fileInput.value = "";
+  };
  });
 }
 renderProducts();
