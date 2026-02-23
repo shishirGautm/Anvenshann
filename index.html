@@ -1,251 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E-commerce</title>
+    <link rel="shortcut icon" href="shishir.jpg" type="image/x-icon">
+    <title>Anveshan</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 { font-family: "Raleway", sans-serif; }
+        body, html { height: 100%; line-height: 1.8; scroll-behavior: smooth; }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        /* Parallax Styling */
+        .bgimg-1 {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("bb.jpg");
+            min-height: 80%;
+        }
+ .bgimg-2 {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("ecommerce.jpg");
+            min-height: 50%;
+        }
+        @media only screen and (max-width: 768px) {
+            .bgimg-1 { background-attachment: scroll; }
+        }
 
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f2f2f2;padding-bottom:120px}
+        .w3-bar .w3-button { padding: 16px; }
 
-/* HEADER */
-.header{display:flex;gap:8px;padding:10px;background:darkblue}
-.search-input{flex:1;padding:10px;border:none;border-radius:6px}
-.search-btn{padding:10px;border:none;border-radius:6px;background:#fff;color:darkblue;font-weight:bold}
+        /* Form Styling */
+        .order-form input, .order-form select, .order-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
 
-/* PRODUCTS */
-.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;padding:15px}
-.card{background:#fff;padding:10px;border-radius:10px;text-align:center;display:flex;flex-direction:column;position:relative}
-.card img{width:100%;height:150px;object-fit:cover;border-radius:8px;cursor:pointer}
-.card p{margin:6px 0;font-size:14px}
-.price{
-  :darkblue;font-weight:bold}
-.order-btn{margin-top:auto;padding:10px;border:none;border-radius:6px;background:darkblue;color:#fff}
 
-/* SOLD */
-.sold-badge{position:absolute;top:10px;left:10px;background:red;color:#fff;padding:5px 8px;border-radius:6px;font-size:12px}
-.sold-img{filter:grayscale(100%)}
-.sold-btn{background:#aaa!important}
-
-/* MODALS */
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);justify-content:center;align-items:center;z-index:1000}
-.image-box{text-align:center;color:#fff}
-.image-box img{max-width:90%;max-height:60vh;border-radius:10px}
-
-/* ORDER MODAL */
-#orderModal form{background:darkblue;color:#fff;padding:20px;width:90%;max-width:420px;border-radius:14px}
-#orderModal input,#orderModal textarea,#orderModal select,#orderModal button{width:100%;margin:6px 0;padding:10px;border:none;border-radius:6px}
-.cancel-btn{background:#fff;color:#000}
-
-/* FOOTER */
-.footer{position:fixed;bottom:0;width:100%;background:darkblue;color:#fff;text-align:center;padding:10px}
-
-@media(max-width:480px){.card img{height:120px}}
-</style>
+        .pay-button {
+            width: 100%;
+            background-color: #009688;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-
 <body>
+<!-- ALERT IMAGE MESSAGE -->
+<div id="imageAlert" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+">
+  <div style="position:relative;max-width:400px;">
+    <span onclick="closeImageAlert()" style="
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    background:black;
+    color:white;
+    padding:6px 10px;
+    cursor:pointer;
+    font-size:18px;">✖</span>
 
-<header class="header">
-<input class="search-input" id="searchInput" placeholder="Search products">
-<button class="search-btn" id="searchBtn">Search</button>
-</header>
-
-<main class="product-grid" id="productGrid"></main>
-
-<!-- IMAGE MODAL -->
-<div id="imageModal" class="modal">
-  <div class="image-box">
-    <img id="modalImg">
-    <h3 id="modalTitle"></h3>
-    <p id="modalPrice"></p>
-    <button id="modalOrderBtn">Order Now</button>
+    <img src="E.jpg" style="width:100%;border-radius:6px;">
   </div>
 </div>
 
-<!-- ORDER MODAL -->
-<div id="orderModal" class="modal">
-<form id="orderForm">
-<h3>Confirm Order</h3>
-
-<input name="name" placeholder="Your Name" required>
-<input name="email" type="email" placeholder="Your Email" required>
-<input name="product" id="productName" readonly>
-<input name="price" id="productPrice" readonly>
-
-<select name="payment" required>
-<option value="cod">Cash on Delivery</option>
-<option value="online">Online Payment on Delivery</option>
-</select>
-
-<input name="quantity" type="number" min="1" value="1" required>
-<textarea name="address" placeholder="Address / Notes"></textarea>
-<input name="contact" placeholder="Contact" required>
-
-<button type="submit">Confirm Order</button>
-<button type="button" class="cancel-btn" id="closeModal">Cancel</button>
-</form>
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="#home" class="w3-bar-item w3-button w3-wide">
+        <img src="shishir.jpg" alt="Logo" style="width: 30px; height: 30px; border-radius: 50%;"> ANVESHAN
+    </a>
+    <div class="w3-right w3-hide-small">
+      <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+      <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
+      <a href="skill.html" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
+    
+      <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+      <a href="ecommerce.html" class="w3-bar-item w3-button"><i class="fa fa-shopping-cart"></i> E-commerce</a>
+    </div>
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
 </div>
 
-<div class="footer">Powered by <b>Anveshan</b></div>
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+  <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">TEAM</a>
+  <a href="skill.html" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
+
+  <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+  <a href="ecommerce.html" onclick="w3_close()" class="w3-bar-item w3-button">E-commerce</a>
+</nav>
+
+<!-- Header -->
+<header class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+  <div class="w3-display-middle" style="white-space:nowrap;">
+    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">ANVESHAN</span>
+  </div>
+</header>
+
+
+<!-- About Section -->
+<div class="w3-container" style="padding:128px 16px" id="about">
+  <h3 class="w3-center">ABOUT THE COMPANY</h3>
+  <p class="w3-center w3-large">Key features of our company</p>
+  <div class="w3-row-padding w3-center" style="margin-top:64px">
+    <div class="w3-quarter">
+      <i class="fa fa-desktop w3-margin-bottom w3-jumbo"></i>
+      <p class="w3-large">Responsive</p>
+      <p>Experiences that adapt smoothly across all devices and screen sizes.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
+      <p class="w3-large">Passion</p>
+      <p>Driven by genuine curiosity and love for the creative process.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
+      <p class="w3-large">Design</p>
+      <p>Meaningful design that blends culture, clarity, and modern aesthetics.</p>
+    </div>
+    <div class="w3-quarter">
+      <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
+      <p class="w3-large">Support</p>
+      <p>Clear communication and timely responses through our platforms.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Promo Section -->
+<div class="w3-container w3-light-grey" style="padding:128px 16px">
+  <div class="w3-row-padding">
+    <div class="w3-col m6">
+      <h3>We know design.</h3>
+      <p>Design rooted in culture, shaped by purpose. Culture, clarity, and craft converge.</p>
+      <p><a href="#work" class="w3-button w3-black"><i class="fa fa-th"> </i> View Our Works</a></p>
+    </div>
+    <div class="w3-col m6">
+      <img class="w3-image w3-round-large" src="Anveshan.jpg" alt="Anveshan" width="700" height="394">
+    </div>
+  </div>
+</div>
+
+<!-- Team Section -->
+<div class="w3-container" style="padding:128px 16px" id="team">
+  <h3 class="w3-center">THE TEAM</h3>
+  <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card">
+        <img src="shishirr.jpg" alt="Shishir" style="width:100%">
+        <div class="w3-container">
+          <h3>Shishir Gautam</h3>
+          <p class="w3-opacity"> CEO  & Frontend Developer </p>
+          <p><a href="shishir.html" class="w3-button w3-light-grey w3-block">More</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card">
+        <img src="himanshu.jpg" alt="Himanshu" style="width:100%">
+        <div class="w3-container">
+          <h3>Himanshu Khadka</h3>
+          <p class="w3-opacity">Director</p>
+          <p><a href="Himanshu.html" class="w3-button w3-light-grey w3-block">More</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card">
+        <img src="pradip.jpg" alt="Pradip" style="width:100%">
+        <div class="w3-container">
+          <h3>Pradip Ghimire</h3>
+          <p class="w3-opacity">Technical Assistance</p>
+          <p><a href="Pradip.html" class="w3-button w3-light-grey w3-block">More</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col l3 m6 w3-margin-bottom">
+      <div class="w3-card">
+        <img src="rishav.jpg" alt="Rishav" style="width:100%">
+        <div class="w3-container">
+          <h3>Rishav Khadka</h3>
+          <p class="w3-opacity">Technical Assistance</p>
+          <p><a href="Rishav.html" class="w3-button w3-light-grey w3-block">More</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- Work Section -->
+<div class="w3-container" style="padding:128px 16px" id="work">
+  <h3 class="w3-center">OUR MEMBERS</h3>
+  <div class="w3-row-padding" style="margin-top:64px">
+    <div class="w3-col l3 m6"><img src="aayush.jpeg" style="width:100%"  onclick="onClick(this)" class="w3-hover-opacity" alt="Aayush Tamang"></div>
+    <div class="w3-col l3 m6"><img src="Phurbaa.jpeg" style="width:100%"  onclick="onClick(this)" class="w3-hover-opacity" alt="Website Ads"></div>
+    <div class="w3-col l3 m6"><img src="rishav.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Creative Design"></div>
+    <div class="w3-col l3 m6"><img src="pradip.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Shivarratri"></div>
+  </div>
+</div>
+
+<!-- Skills Section -->
+<div class="w3-container w3-light-grey" style="padding:128px 16px">
+  <div class="w3-row-padding">
+    <div class="w3-col m6">
+      <h3><b>Our Skills.</b></h3>
+      <ul class="w3-ul" style="font-size: 1.1em;">
+        <li>• Visual storytelling & cinematic narratives</li>
+        <li>• Photography & cinematography</li>
+        <li>• Frontend & graphic design</li>
+        <li>• Creative direction & concept building</li>
+      </ul>
+    </div>
+    <div class="w3-col m6">
+      <p class="w3-wide"><i class="fa fa-camera w3-margin-right"></i>Photography 99%</p>
+      <div class="w3-grey"><div class="w3-container w3-black w3-center" style="width:99%">99%</div></div>
+      <p class="w3-wide"><i class="fa fa-desktop w3-margin-right"></i>Web Design 85%</p>
+      <div class="w3-grey"><div class="w3-container w3-black w3-center" style="width:85%">85%</div></div>
+      <p class="w3-wide"><i class="fa fa-book w3-margin-right"></i>Book Writing 93%</p>
+      <div class="w3-grey"><div class="w3-container w3-black w3-center" style="width:93%">93%</div></div>
+    </div>
+  </div>
+</div>
+
+
+   <center> <h2 class="w3-wide" style="background-color: black;color:white ;">OUR E-commerce Site</h2>
+    <p class="w3-opacity"><b>Available for order</b></p></center>
+<header class="bgimg-2 w3-display-container w3-opacity-min" id="home">
+  <div class="w3-display-middle" style="white-space:nowrap;">
+    <a href="ecommerce.html" class="w3-button w3-light-grey w3-block"> Click here to Go</a></span>
+  </div>
+</header>
+
+<!-- E-commerce Section -->
+
+   
+       
+    </div>
+  </div>
+</div>
+
+<!-- Contact Section -->
+<div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
+  <h3 class="w3-center">CONTACT</h3>
+  <div class="w3-row-padding" style="margin-top:48px">
+    <div class="w3-col m5">
+      <p><i class="fa fa-map-marker w3-xxlarge w3-margin-right"></i> Kathmandu, Nepal</p>
+      <p><i class="fa fa-phone w3-xxlarge w3-margin-right"></i> 9761120781, 9803631685</p>
+      <p><i class="fa fa-envelope w3-xxlarge w3-margin-right"></i> anveshanprojects@gmail.com</p>
+    </div>
+    <div class="w3-col m7">
+      <form action="https://formspree.io/f/xykjkdvn" method="POST">
+        <input class="w3-input w3-border" type="text" name="name" placeholder="Name" required>
+        <input class="w3-input w3-border w3-section" type="email" name="email" placeholder="Email" required>
+        <input class="w3-input w3-border w3-section" type="text" name="subject" placeholder="Subject" required>
+        <textarea class="w3-input w3-border w3-section" name="message" placeholder="Message" required></textarea>
+        <button class="w3-button w3-black w3-right" type="submit"><i class="fa fa-paper-plane"></i> SEND MESSAGE</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-64">
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <div class="w3-xlarge w3-section">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <a href="https://www.instagram.com/_anveshan__"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+  </div>
+  <p>Powered by <a href="#" target="_blank" class="w3-hover-text-green">Anveshan</a></p>
+</footer>
+
+<!-- Image Modal -->
+<div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+  <span class="w3-button w3-xxlarge w3-black w3-padding-large w3-display-topright">×</span>
+  <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+    <img id="img01" class="w3-image" style="max-width: 90%;">
+  </div>
+</div>
 
 <script>
-const products=[
-{name:"A Quiet Light",price:449,img:"b1.jpg",stock:1},
-{name:"Words Left In My Notes",price:449,img:"bb2.png",stock:1},
-{name:"Tws Airpod",price:600,img:"tws.jpg",stock:1},
-{name:"Photo Light Clip",price:500,img:"photo light clip.jpg",stock:1},
-{name:"RGB Mouse",price:350,img:"RGB MOUSE.jpg",stock:1},
-{name:"RGB Keyboard",price:900,img:"rgb.jpg",stock:1},
-{name:"Trimmer",price:400,img:"trimmer.jpg",stock:1},
-{name:"Mini USB Hub",price:450,img:"usb.jpg",stock:1},
-
-{name:"Barcelona Jersey",price:900,img:"barca jersy.jpg",stock:0},
-{name:"Barcelona Old Jersey",price:1999,img:"barca old jers.jpg",stock:1},
-{name:"LCD Writing Tab",price:250,img:"Tab.jpeg",stock:1},
-{name:"3 in 1 Selfi Stick Tripod",price:550,img:"selfi stick.jpeg",stock:1},
-{name:" Phone holder Plug",price:150,img:"holder.jpeg",stock:1},
-{name:"Mini Tripod",price:450,img:"tripod.jpeg",stock:1},
-{name:"Gorilla Tripod ",price:550,img:"gorila.jpeg",stock:1},
-{name:"Barcelona Jersey ",price:1800,img:"Barcelona.jpg",stock:1},
-{name:"Argentina Old Jersey",price:1999,img:"argentina old jersy.jpg",stock:1},
-{name:"Manchester United Red Jersey",price:900,img:"manchaster.jpg",stock:0},
-{name:"Manchester United Jersey",price:900,img:"manchester.jpg",stock:0},
-{name:"Real Madrid Jersey",price:900,img:"real madrid jersy.jpg",stock:0},
-{name:"CSK Jersey",price:900,img:"csk jersy.jpg",stock:0},
-{name:"Mumbai Indians Jersey",price:900,img:"Mi jersy.jpg",stock:0},
-{name:"Yellow Jersey",price:900,img:"yellow jersy.jpg",stock:0},
-
-{name:"LED Night Light Mini",price:100,img:"LED Night Light Mini.jpg",stock:1},
-{name:"Hot glue gun",price:350,img:"hot glue gun.jpg",stock:1},
-{name:"Discovery Mathematical Instrument box",price:200,img:"Discovery Mathematical Instrument box.jpg",stock:1},
-{name:"Resistor",price:80,img:"Resistor.jpg",stock:1},
-{name:"Small switch",price:50,img:"small switch.jpg",stock:1},
-{name:"Mini cell phone fan for usb-c",price:200,img:"mini cell phone fan for usb-c.jpg",stock:1},
-{name:"Mini bluetooth speaker",price:9500,img:"mini bluetooth speaker.jpg",stock:1},
-{name:"Coffeemilk 1 hand blender",price:350,img:"coffeemilk 1 hand blender.jpg",stock:1},
-{name:"Rubik cube",price:350,img:"rubik cube.jpg",stock:1},
-{name:"Charger cable protector",price:100,img:"charger cable protector.jpg",stock:1},
-{name:"14 inch universal silicon cover",price:100,img:"14 inch universal silicon cover.jpg",stock:1},
-{name:"Earphone 3.5 mm jack",price:100,img:"Earphone 3.5 mm jack.jpg",stock:1},
-{name:"Customize cup with your photos",price:450,img:"cup.jpg",stock:1},
-{name:"Rechargable portable mini fan",price:350,img:"rechargable portable mini fan.jpg",stock:1},
-{name:"Earbuds wireless with dual stereo Micropjone",price:100,img:"earbuds wireless with dual stereo Micropjone.jpg",stock:1},
-{name:"lazer light.jpg",price:100,img:"lazer light.jpg",stock:1},
-{name:"Bendable usb LED",price:100,img:"bendable usb LED.jpg",stock:1},
-{name:"Jbl mini Speaker",price:450,img:"jbl mini Speaker.jpg",stock:1},
-{name:"Head Messager",price:130,img:"head messager.jpg",stock:1},
-];
-
-const grid=document.getElementById("productGrid");
-const searchInput=document.getElementById("searchInput");
-const searchBtn=document.getElementById("searchBtn");
-
-const imageModal=document.getElementById("imageModal");
-const modalImg=document.getElementById("modalImg");
-const modalTitle=document.getElementById("modalTitle");
-const modalPrice=document.getElementById("modalPrice");
-const modalOrderBtn=document.getElementById("modalOrderBtn");
-
-const orderModal=document.getElementById("orderModal");
-const orderForm=document.getElementById("orderForm");
-const productName=document.getElementById("productName");
-const productPrice=document.getElementById("productPrice");
-const closeModal=document.getElementById("closeModal");
-
-/* RENDER PRODUCTS */
-function renderProducts(){
-  grid.innerHTML="";
-  products.forEach(p=>{
-    const c=document.createElement("div");
-    c.className="card";
-    c.innerHTML=`
-      <img src="${p.img}" class="${p.stock?"":"sold-img"}">
-      ${p.stock?"":'<span class="sold-badge">SOLD OUT</span>'}
-      <p>${p.name}</p>
-      <p class="price">Rs. ${p.price}</p>
-      <button class="order-btn ${p.stock?"":"sold-btn"}" ${p.stock?"":"disabled"}>
-        ${p.stock?"Order Now":"Sold Out"}
-      </button>`;
-    grid.appendChild(c);
-
-    c.querySelector("img").onclick=()=>openImage(p);
-    if(p.stock) c.querySelector("button").onclick=()=>openOrder(p);
-  });
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
 }
-renderProducts();
-
-/* IMAGE MODAL */
-function openImage(p){
-  modalImg.src=p.img;
-  modalTitle.textContent=p.name;
-  modalPrice.textContent="Rs. "+p.price;
-  modalOrderBtn.style.display=p.stock?"block":"none";
-  modalOrderBtn.onclick=()=>{imageModal.style.display="none";openOrder(p)};
-  imageModal.style.display="flex";
+var mySidebar = document.getElementById("mySidebar");
+function w3_open() {
+  mySidebar.style.display = (mySidebar.style.display === 'block') ? 'none' : 'block';
 }
-imageModal.onclick=e=>{if(e.target===imageModal)imageModal.style.display="none"};
-
-/* ORDER MODAL */
-function openOrder(p){
-  productName.value=p.name;
-  productPrice.value="Rs. "+p.price;
-  orderModal.style.display="flex";
+function w3_close() { mySidebar.style.display = "none"; }
+function closeImageAlert() {
+  document.getElementById("imageAlert").style.display = "none";
 }
-closeModal.onclick=()=>orderModal.style.display="none";
 
-/* FORM → FORMSPREE + WHATSAPP + ALERT */
-orderForm.onsubmit = async (e)=>{
-  e.preventDefault();
-  const f=e.target;
-
-  const data={
-    name:f.name.value,
-    email:f.email.value,
-    product:f.product.value,
-    price:f.price.value,
-    quantity:f.quantity.value,
-    payment:f.payment.value,
-    address:f.address.value,
-    contact:f.contact.value
-  };
-
-  await fetch("https://formspree.io/f/xqeldbro",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(data)
-  });
-
-  const msg=`🛒 New Order
-Product: ${data.product}
-Price: ${data.price}
-Qty: ${data.quantity}
-Payment: ${data.payment}
-
-Name: ${data.name}
-Contact: ${data.contact}
-Address: ${data.address}`;
-
-  window.open("https://wa.me/9779761120781?text="+encodeURIComponent(msg),"_blank");
-
-  alert("✅ Order Confirmed!\nThank you for your order.\nWe will contact you shortly.");
-
-  orderModal.style.display="none";
-  f.reset();
-};
-
-/* SEARCH */
-function searchProducts(){
-  const v=searchInput.value.toLowerCase();
-  document.querySelectorAll(".card").forEach(c=>{
-    c.style.display=c.innerText.toLowerCase().includes(v)?"flex":"none";
-  });
-}
-searchBtn.onclick=searchProducts;
-searchInput.onkeyup=searchProducts;
 </script>
 
 </body>
