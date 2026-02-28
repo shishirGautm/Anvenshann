@@ -5,178 +5,154 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+
+<style>
+/* ALWAYS 4 ITEMS PER ROW */
+.services-grid{
+display:grid;
+grid-template-columns: repeat(4, 1fr);
+gap:16px;
+}
+
+.service-card{
+cursor:pointer;
+}
+.team-grid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap:16px;
+}
+.team-card img{
+  width:100%;
+  height:auto;
+}
+</style>
+
 </head>
 <body>
 
-<!-- Navbar (sit on top) -->
+<!-- Navbar -->
 <div class="w3-top">
-  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
-    <a href="#home" class="w3-bar-item w3-button"><b>Anveshan</a>
-    <!-- Float links to the right. Hide them on small screens -->
-    
-  </div>
+<div class="w3-bar w3-white w3-wide w3-padding w3-card">
+<a href="#home" class="w3-bar-item w3-button"><b>Anveshan</b></a>
+</div>
 </div>
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
-  <img class="w3-image" src="bannnn.jpg" alt="Architecture" width="1500" height="400">
-  <div class="w3-display-middle w3-margin-top w3-center">
-    <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding w3-black w3-opacity-min"><b>Our Services</b></span> <span class="w3-hide-small w3-text-light-grey"></span></h1>
-  </div>
+<img class="w3-image" src="bannnn.jpg" width="1500" height="400">
+<div class="w3-display-middle w3-margin-top w3-center">
+<h1 class="w3-xxlarge w3-text-white">
+<span class="w3-padding w3-black w3-opacity-min"><b>Our Services</b></span>
+</h1>
+</div>
 </header>
 
-<!-- Page content -->
 <div class="w3-content w3-padding" style="max-width:1564px">
 
-  <br>
+<br>
 
-  <div class="w3-row-padding">
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding"> Banner Designs</div>
-        <img src="banner.jpeg" alt="House" style="width:100%">
-      </div>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding"> LOGO Designs</div>
-        <img src="logo.jpeg" alt="House" style="width:100%">
-      </div>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding"> Frontend Web Design</div>
-        <img src="frontend.jpg" alt="House" style="width:100%">
-      </div>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding">Backend Web Design</div>
-        <img src="bakend.jpg" alt="House" style="width:100%">
-      </div>
-    </div>
-  </div>
+<!-- SERVICES (DYNAMIC) -->
+<div id="servicesContainer" class="services-grid"></div>
 
-  <div class="w3-row-padding">
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding">Documents Editing</div>
-        <img src="documents.jpg" alt="House" style="width:99%">
-      </div>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding"> CV Designs</div>
-        <img src="cv.jpg" alt="House" style="width:99%">
-      </div>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding">Graphics Designs</div>
-        <img src="graphics.jpg" alt="House" style="width:99%">
-      </div>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-display-topleft w3-black w3-padding">Others Services</div>
-        <img src="other.jpg" alt="House" style="width:99%">
-      </div>
-    </div>
-  </div>
 
-  <!-- About Section -->
-  <div class="w3-container w3-padding-32" id="about">
-    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">About Team Members</h3>
-    <p>We’re a small team that does it all.
-Whether you need a new website, a cool design, or help with your CV and paperwork, we’ve got you covered. We handle the tech stuff and the creative stuff so you don’t have to worry about it.
-    </p>
-  </div>
 
-  <div class="w3-row-padding w3-grayscale">
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <img src="shishirr.jpg" alt="John" style="width:100%">
-      <h3> Shishir Gautam</h3>
-      <p class="w3-opacity">Graphics Designer</p>
-  
-      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <img src="sa.jpg" alt="sanjib" style="width:100%">
-      <h3> Sanjib Tamang</h3>
-      <p class="w3-opacity">Architect</p>
-    
-      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <img src="himanshu.jpg" alt="Himanshu" style="width:100%">
-      <h3>Himanshu Khadka</h3>
-      <p class="w3-opacity">Director and Writer </p>
 
-      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <img src="rishav.jpg" alt="Dan" style="width:100%">
-      <h3> Rishav Khadka</h3>
-      <p class="w3-opacity">Architect</p>
-    
-      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
-    </div>
-  </div>
+<!-- MODAL -->
+<div id="designModal" class="w3-modal" onclick="this.style.display='none'">
+<div class="w3-modal-content w3-animate-zoom w3-center w3-padding">
+<img id="modalImage" style="width:100%">
+</div>
+</div>
+<!-- About Section -->
+<div class="w3-container w3-padding-32" id="about">
+  <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">About Team Members</h3>
+  <p>
+    We’re a small team that does it all.
+    Whether you need a new website, a cool design, or help with your CV and paperwork, we’ve got you covered.
+    We handle the tech stuff and the creative stuff so you don’t have to worry about it.
+  </p>
+</div>
+<div id="teamContainer" class="team-grid w3-grayscale"></div>
 
-   <div class="w3-row-padding w3-grayscale">
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <img src="raj.jpg" alt="John" style="width:100%">
-      <h3>Raj Kumar Tamang</h3>
-      <p class="w3-opacity">LOGO Designer</p>
 
-      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <img src="phu.jpg" alt="sanjib" style="width:100%">
-      <h3>Phurba Tamang</h3>
-      <p class="w3-opacity"> Cv and Document Editor</p>
+<script>
+const servicesData = [
+{ title:"", img:"banner.jpeg" },
+{ title:"", img:"logo.jpeg" },
+{ title:"", img:"frontend.jpg" },
+{ title:"", img:"bakend.jpg" },
+{ title:"", img:"documents.jpg" },
+{ title:"", img:"cv.jpg" },
+{ title:"", img:"graphics.jpg" },
+{ title:"", img:"other.jpg" }
+];
+
+<!-- About Section -->
+
+
+const teamData = [
+  {  img:"shishirr.jpg" },
+  { img:"sa.jpg" },
+  { img:"himanshu.jpg" },
+  {  img:"rishav.jpg" },
+  { img:"raj.jpg" },
+  { img:"phu.jpg" },
+  { img:"pradip.jpg" },
+  { img:"wan.jpg" }
+];
+
+const teamContainer = document.getElementById("teamContainer");
+
+teamData.forEach(member=>{
+  const card = document.createElement("div");
+  card.className="team-card";
+  card.innerHTML=`
+    <img src="${member.img}" alt="${member.name}">
+   
     <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <img src="pradip.jpg" alt="Himanshu" style="width:100%">
-      <h3>Pradip Ghimire</h3>
-      <p class="w3-opacity">Technical Assistance </p>
+  `;
+  teamContainer.appendChild(card);
+});
+const container = document.getElementById("servicesContainer");
 
-      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
-    </div>
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <img src="wan.jpg" alt="Dan" style="width:100%">
-      <h3> Wanjgu Lama</h3>
-      <p class="w3-opacity">Architect</p>
+servicesData.forEach(service=>{
+const card = document.createElement("div");
+card.className="service-card w3-display-container w3-hover-shadow";
+card.onclick=()=>openModal(service.img);
 
-      <p><button class="w3-button w3-light-grey w3-block">Contact</button></p>
-    </div>
-  </div>
-  <!-- Contact Section -->
-  <div class="w3-container w3-padding-32" id="contact">
-    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Contact</h3>
-    <p>Lets get in touch and talk about your next project.</p>
-    <form action="/action_page.php" target="_blank">
-      <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
-      <input class="w3-input w3-section w3-border" type="text" placeholder="Email" required name="Email">
-      <input class="w3-input w3-section w3-border" type="text" placeholder="Subject" required name="Subject">
-      <input class="w3-input w3-section w3-border" type="text" placeholder="Comment" required name="Comment">
-      <button class="w3-button w3-black w3-section" type="submit">
-        <i class="fa fa-paper-plane"></i> SEND MESSAGE
-      </button>
-    </form>
-  </div>
-  
-<!-- Image of location/map -->
+card.innerHTML=`
+<div class="w3-display-topleft  w3-padding">${service.title}</div>
+<img src="${service.img}" style="width:100%">
+`;
 
+container.appendChild(card);
+});
 
-<!-- End page content -->
+function openModal(imgSrc){
+document.getElementById("modalImage").src=imgSrc;
+document.getElementById("designModal").style.display="block";
+}
+</script>
+<!-- Contact Section -->
+<div class="w3-container w3-padding-32" id="contact">
+<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Contact</h3>
+<p>Lets get in touch and talk about your next project.</p>
+<form action="/action_page.php" target="_blank">
+<input class="w3-input w3-border" type="text" placeholder="Name" required>
+<input class="w3-input w3-section w3-border" type="text" placeholder="Email" required>
+<input class="w3-input w3-section w3-border" type="text" placeholder="Subject" required>
+<input class="w3-input w3-section w3-border" type="text" placeholder="Comment" required>
+<button class="w3-button w3-black w3-section" type="submit">SEND MESSAGE</button>
+</form>
+</div>
+
 </div>
 
 
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-16">
-  <p>Powered by <a href="https://shishirgtm.com.np/" title="W3.CSS" target="_blank" class="w3-hover-text-green">Anveshan</a></p>
+<p>Powered by Anveshan</p>
 </footer>
 
 </body>
