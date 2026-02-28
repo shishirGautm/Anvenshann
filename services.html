@@ -92,35 +92,7 @@ const servicesData = [
 
 
 
-const teamData = [
-  {  img:"shishirr.jpg", phone:"+9779761120781" },
-  {  img:"sa.jpg", phone:"+9779702828872" },
-  {  img:"rishav.jpg", phone:"+9779827880571" },
-  { img:"raj.jpg", phone:"+9779818195923" },
-  {  img:"phu.jpg", phone:"+9779818543031" },
-  { img:"pradip.jpg", phone:"+9779761076795" },
-  {  img:"wan.jpg", phone:"+9779745346957" },
-  {  img:"himanshu.jpg", phone:"+9779803631685" },
-];
 
-const teamContainer = document.getElementById("teamContainer");
-
-teamData.forEach(member=>{
-  const card = document.createElement("div");
-  card.className="team-card";
-  card.innerHTML=`
-    <img src="${member.img}" alt="${member.name}">
-    
-    <p </p>
-    <p>
-      <button class="w3-button w3-light-grey w3-block"
-        onclick="window.open('https://wa.me/${member.phone.replace(/\D/g,'')}', '_blank')">
-        Contact
-      </button>
-    </p>
-  `;
-  teamContainer.appendChild(card);
-});
 
 const container = document.getElementById("servicesContainer");
 
