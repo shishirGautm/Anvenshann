@@ -1,53 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Services</title>
+<title>Services - Anveshan</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
 
 <style>
-/* ===== SERVICES GRID ===== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial, sans-serif;
+}
+
+/* ================= HEADER ================= */
+.header-banner{
+position:relative;
+width:100%;
+}
+
+.header-banner img{
+width:100%;
+height:clamp(180px, 30vw, 320px);
+object-fit:cover;
+display:block;
+}
+
+.header-banner h1{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:white;
+font-size:clamp(22px, 4vw, 42px);
+font-weight:bold;
+text-shadow:2px 2px 10px rgba(0,0,0,0.6);
+}
+
+/* ================= SERVICES GRID ================= */
 .services-grid{
 display:grid;
-grid-template-columns: repeat(4, 1fr);
-gap:16px;
+grid-template-columns:repeat(4, 1fr);
+gap:20px;
+padding:20px;
+width:100%;
 }
 
+/* Tablet */
 @media (max-width:992px){
-.services-grid{ grid-template-columns: repeat(3, 1fr); }
+.services-grid{
+grid-template-columns:repeat(3, 1fr);
+}
 }
 
+/* Mobile */
 @media (max-width:600px){
-.services-grid{ grid-template-columns: repeat(2, 1fr); }
+.services-grid{
+grid-template-columns:repeat(2, 1fr);
+}
 }
 
-@media (max-width:380px){
-.services-grid{ grid-template-columns: 1fr; }
+/* Very small phone */
+@media (max-width:350px){
+.services-grid{
+grid-template-columns:1fr;
+}
 }
 
 .service-card{
 position:relative;
 cursor:pointer;
 overflow:hidden;
-border-radius:8px;
+border-radius:12px;
 }
 
 .service-card img{
 width:100%;
-height:auto;
-display:block;
-border-radius:8px;
-transition: transform 0.3s ease;
+height:220px;
+object-fit:cover;
+border-radius:12px;
+transition:0.3s;
 }
 
 .service-card:hover img{
-transform: scale(1.05);
+transform:scale(1.05);
 }
 
-/* Overlay "Tap to View" */
-.service-card::after{
-content:"Tap to View";
+/* Tap to View */
+.service-card span{
 position:absolute;
 bottom:10px;
 left:50%;
@@ -57,48 +102,40 @@ color:white;
 padding:6px 12px;
 border-radius:6px;
 font-size:14px;
-opacity:0;
-transition: opacity 0.3s ease;
 }
 
-.service-card:hover::after{
-opacity:1;
-}
-
-/* ===== CONTACT BUTTON ===== */
-.contact-section{
-text-align:center;
-margin:40px 0;
-padding:0 10px;
-}
-
-.contact-btn{
-background:#0b3d91;
-color:white;
-border:none;
-padding:14px 28px;
-font-size:18px;
-border-radius:8px;
-cursor:pointer;
+/* ================= IMAGE MODAL ================= */
+.image-modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
 width:100%;
-max-width:320px;
+height:100%;
+background:rgba(0,0,0,0.8);
+z-index:1000;
+justify-content:center;
+align-items:center;
+padding:20px;
 }
 
-.contact-btn:hover{
-background:#082c6c;
+.image-modal img{
+max-width:90%;
+max-height:90%;
+border-radius:10px;
 }
 
-/* ===== DARK BLUE MODAL ===== */
+/* ================= CONTACT MODAL ================= */
 .modal{
 display:none;
 position:fixed;
-z-index:999;
-left:0;
 top:0;
+left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,0.6);
-padding:12px;
+z-index:1000;
+padding:15px;
 overflow:auto;
 }
 
@@ -106,8 +143,7 @@ overflow:auto;
 background:#0b3d91;
 color:white;
 padding:20px;
-width:100%;
-max-width:340px;
+max-width:350px;
 margin:60px auto;
 display:flex;
 flex-direction:column;
@@ -141,12 +177,34 @@ background:#082c6c;
 color:white;
 }
 
-/* ===== RESPONSIVE FOOTER ===== */
+/* ================= CONTACT BUTTON ================= */
+.contact-section{
+text-align:center;
+padding:20px;
+}
+
+.contact-btn{
+background:#0b3d91;
+color:white;
+border:none;
+padding:14px 30px;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+width:100%;
+max-width:350px;
+}
+
+.contact-btn:hover{
+background:#082c6c;
+}
+
+/* ================= FOOTER ================= */
 .footer{
 background:black;
 color:white;
-padding:20px 10px;
 text-align:center;
+padding:20px 10px;
 }
 
 .footer-content{
@@ -158,7 +216,7 @@ flex-wrap:wrap;
 font-size:14px;
 }
 
-@media (max-width:600px){
+@media(max-width:600px){
 .footer-content{
 flex-direction:column;
 gap:8px;
@@ -170,72 +228,56 @@ font-size:13px;
 
 <body>
 
-<!-- Navbar -->
-<div class="w3-top">
-<div class="w3-bar w3-white w3-wide w3-padding w3-card">
-<a href="#home" class="w3-bar-item w3-button"><b>Anveshan</b></a>
-</div>
-</div>
-
 <!-- Header -->
-<header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
-<img class="w3-image" src="bannnn.jpg" width="1500" height="400">
-<div class="w3-display-middle w3-margin-top w3-center">
-<h1 class="w3-xxlarge w3-text-white"><b>Our Services</b></h1>
-</div>
+<header class="header-banner">
+<img src="bannnn.jpg" alt="Services Banner">
+<h1>Our Services</h1>
 </header>
 
-<div class="w3-content w3-padding" style="max-width:1564px">
-
-<!-- SERVICES -->
+<!-- Services -->
 <div id="servicesContainer" class="services-grid"></div>
 
-<!-- CONTACT BUTTON -->
+<!-- Contact Button -->
 <div class="contact-section">
 <button class="contact-btn" id="openContact">Contact Now</button>
 </div>
 
+<!-- Image Modal -->
+<div class="image-modal" id="imageModal">
+<img id="modalImage">
 </div>
 
-<!-- IMAGE MODAL -->
-<div id="designModal" class="w3-modal" onclick="this.style.display='none'">
-<div class="w3-modal-content w3-animate-zoom w3-center w3-padding">
-<img id="modalImage" style="width:100%">
-</div>
-</div>
-
-<!-- CONTACT MODAL -->
-<div id="orderModal" class="modal">
+<!-- Contact Modal -->
+<div class="modal" id="orderModal">
 <form id="orderForm">
-<h3>Contact </h3>
+<h3>Contact</h3>
 
 <input name="name" placeholder="Your Name" required>
 <input name="email" type="email" placeholder="Your Email" required>
 
 <select name="service" required>
-<option value="Banner Design">Banner Design</option>
-<option value="Frontend Web Development">Frontend Web Development</option>
-<option value="Backend Web Development">Backend Web Development</option>
-<option value="Logo Design">Logo Design</option>
-<option value="Document Editing">Document Editing</option>
-<option value="CV Design and Editing">CV Design and Editing</option>
-<option value="Graphics Designs">Graphics Designs</option>
-<option value="Other Services">Other Services</option>
+<option>Banner Design</option>
+<option>Frontend Web Development</option>
+<option>Backend Web Development</option>
+<option>Logo Design</option>
+<option>Document Editing</option>
+<option>CV Design and Editing</option>
+<option>Graphics Designs</option>
+<option>Other Services</option>
 </select>
 
-<input name="contact" placeholder="Contact" required>
+<input name="contact" placeholder="Contact Number" required>
 
-<button type="submit">Contact Now</button>
+<button type="submit">Submit</button>
 <button type="button" class="cancel-btn" id="closeModal">Cancel</button>
 </form>
 </div>
 
-<!-- FOOTER -->
+<!-- Footer -->
 <footer class="footer">
 <div class="footer-content">
 <span>© 2025 Anveshan</span>
 <span>All Rights Reserved</span>
-
 </div>
 </footer>
 
@@ -256,36 +298,44 @@ const container = document.getElementById("servicesContainer");
 servicesData.forEach(service=>{
 const card = document.createElement("div");
 card.className="service-card";
-card.innerHTML=`<img src="${service.img}">`;
+card.innerHTML=`
+<img src="${service.img}">
+<span>Tap to View</span>
+`;
 card.onclick=()=>{
 document.getElementById("modalImage").src=service.img;
-document.getElementById("designModal").style.display="block";
+document.getElementById("imageModal").style.display="flex";
 };
 container.appendChild(card);
 });
 
-const orderModal = document.getElementById("orderModal");
-document.getElementById("openContact").onclick=()=>orderModal.style.display="block";
-document.getElementById("closeModal").onclick=()=>orderModal.style.display="none";
+/* Close image modal */
+document.getElementById("imageModal").onclick=function(){
+this.style.display="none";
+};
 
-/* FORM → FORMSPREE → WHATSAPP */
-const form = document.getElementById("orderForm");
-form.addEventListener("submit", async function(e){
-e.preventDefault();
-const formData = new FormData(form);
-try{
-await fetch("https://formspree.io/f/YOUR_FORMSPREE_ID", {
-method: "POST",
-body: formData,
-headers: { 'Accept': 'application/json' }
-});
-const name = formData.get("name");
-const service = formData.get("service");
-const message = encodeURIComponent(`Hello, my name is ${name}. I want ${service}.`);
-window.location.href = `https://wa.me/9779761120781?text=${message}`;
-}catch(error){
-alert("Submission failed. Try again.");
+/* Contact Modal */
+const orderModal = document.getElementById("orderModal");
+
+document.getElementById("openContact").onclick=()=>{
+orderModal.style.display="block";
+};
+
+document.getElementById("closeModal").onclick=()=>{
+orderModal.style.display="none";
+};
+
+window.onclick=function(e){
+if(e.target==orderModal){
+orderModal.style.display="none";
 }
+};
+
+/* Form */
+document.getElementById("orderForm").addEventListener("submit",function(e){
+e.preventDefault();
+alert("Form Submitted Successfully!");
+orderModal.style.display="none";
 });
 </script>
 
