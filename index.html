@@ -51,7 +51,6 @@ border-radius:6px;
 
 <body>
 
-
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card" id="myNavbar">
@@ -60,44 +59,35 @@ border-radius:6px;
       <img src="shishir.jpg" alt="Anveshan" style="height: 1cm;width: 1cm;"> ANVESHAN
     </a>
 
-    <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
       <a href="#about" class="w3-bar-item w3-button">
         <i class="fa fa-info-circle"></i> ABOUT
       </a>
 
       <a href="#team" class="w3-bar-item w3-button">
-        <i class="fa fa-users"></i> TEAM
+        <i class="fa fa-cogs"></i> Offers
       </a>
 
       <a href="#work" class="w3-bar-item w3-button">
         <i class="fa fa-briefcase"></i> WORK
       </a>
 
-     
       <a href="services.html" class="w3-bar-item w3-button">
         <i class="fa fa-cogs"></i> SERVICES
       </a>
     </div>
 
-    <!-- Mobile menu button -->
-    <a href="javascript:void(0)" 
-       class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" 
-       onclick="w3_open()">
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
       <i class="fa fa-bars"></i>
     </a>
 
   </div>
 </div>
 
-<!-- Sidebar for small screens -->
-<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left 
-            w3-hide-medium w3-hide-large" 
-     style="display:none" id="mySidebar">
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large"
+style="display:none" id="mySidebar">
 
-  <a href="javascript:void(0)" 
-     onclick="w3_close()" 
-     class="w3-bar-item w3-button w3-large w3-padding-16">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">
      <i class="fa fa-close"></i> Close
   </a>
 
@@ -106,20 +96,19 @@ border-radius:6px;
   </a>
 
   <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">
-    <i class="fa fa-users"></i> TEAM
+    <i class="fa fa-cogs"></i> Offers
   </a>
 
   <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">
     <i class="fa fa-briefcase"></i> WORK
   </a>
 
-  
-
   <a href="services.html" onclick="w3_close()" class="w3-bar-item w3-button">
     <i class="fa fa-cogs"></i> SERVICES
   </a>
 
 </nav>
+
 <!-- HEADER -->
 <header class="bgimg-1 w3-display-container" id="home">
 <div class="w3-display-middle">
@@ -163,28 +152,112 @@ border-radius:6px;
 <div class="w3-container w3-light-grey w3-padding-64">
 <div class="w3-row">
 <div class="w3-col m6 w3-center">
-<img src="shishirr.jpg" class="w3-round w3-image" width="300">
+<img src="himanshu.jpg" class="w3-round w3-image" width="300">
 </div>
 <div class="w3-col m6">
-<h3></h3>
-<p> Hello, I’m Shishir Gautam, the CEO and founder of Anveshan. <br><br>
-  I work as a Frontend Developer and Graphics Designer, creating modern,<br>
-   user-friendly digital experiences and creative designs.
+<p>
+Hello, I’m Himanshu Khadka, the Director of Anveshan.<br><br>
 
-At Anveshan, I lead a passionate team that provides web development, design, <br>
-and digital services to help ideas grow into real results. <br> From building websites to creating visual content, <br>we focus on quality, creativity, and reliability.
+At Anveshan, I lead a passionate team that provides web development, design,
+and digital services to help ideas grow into real results. From building websites
+to creating visual content, we focus on quality, creativity, and reliability.<br><br>
 
-<br>Our goal is simple — to deliver meaningful work that helps people and businesses move forward.</p>
+Our goal is simple — to deliver meaningful work that helps people and businesses move forward.
+</p>
 </div>
 </div>
 </div>
 
 <!-- TEAM -->
 <div class="w3-container w3-padding-64" id="team">
-<h3 class="w3-center">OUR TEAM</h3>
 <div id="teamContainer" class="team-grid"></div>
 </div>
 
+<!-- SERVICES GRID -->
+<div class="w3-row w3-container">
+  <div class="w3-center w3-padding-64">
+    <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">What We Offer</span>
+  </div>
+
+  <div class="w3-col l3 m6 w3-light-grey w3-container w3-padding-16">
+    <h3>Graphics Design</h3>
+    <p>Graphic design is about turning ideas into visuals that people can easily understand and connect with.</p>
+  </div>
+
+  <div class="w3-col l3 m6 w3-grey w3-container w3-padding-16">
+    <h3>Boosting</h3>
+    <p>It refers to raising performance, visibility, or impact.</p>
+  </div>
+
+  <div class="w3-col l3 m6 w3-dark-grey w3-container w3-padding-16">
+    <h3>Frontend</h3>
+    <p>The part users see and interact with (HTML, CSS, JS).</p>
+  </div>
+
+  <div class="w3-col l3 m6 w3-black w3-container w3-padding-16">
+    <h3>Backend</h3>
+    <p>Works behind the scenes with logic and server operations.</p>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="w3-row-padding" id="plans">
+
+  <div class="w3-third w3-margin-bottom">
+    <ul class="w3-ul w3-border w3-center w3-hover-shadow">
+      <li class="w3-black w3-xlarge w3-padding-32">Basic</li>
+      <li class="w3-padding-16"><b>20</b> Photography</li>
+      <li class="w3-padding-16"><b>5</b> Graphics Designs</li>
+      <li class="w3-padding-16"><b>5</b> Boosting</li>
+      <li class="w3-padding-16"><i class="fa fa-check-circle"></i> Verified Badge</li>
+      <li class="w3-padding-16"><b>Endless</b> Support</li>
+      <li class="w3-padding-16">
+        <h2 class="w3-wide">$10</h2>
+        <span class="w3-opacity">per month</span>
+      </li>
+      <li class="w3-light-grey w3-padding-24">
+        <button class="w3-button w3-green w3-padding-large">Sign Up</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="w3-third w3-margin-bottom">
+    <ul class="w3-ul w3-border w3-center w3-hover-shadow">
+      <li class="w3-dark-grey w3-xlarge w3-padding-32">Pro</li>
+      <li class="w3-padding-16"><b>30+</b> Photography</li>
+      <li class="w3-padding-16"><b>10+</b> Graphics Designs</li>
+      <li class="w3-padding-16"><b>8</b> Boosting</li>
+      <li class="w3-padding-16"><i class="fa fa-check-circle"></i> Verified Badge</li>
+      <li class="w3-padding-16"><b>Endless</b> Support</li>
+      <li class="w3-padding-16">
+        <h2 class="w3-wide">$20</h2>
+        <span class="w3-opacity">per month</span>
+      </li>
+      <li class="w3-light-grey w3-padding-24">
+        <button class="w3-button w3-green w3-padding-large">Sign Up</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="w3-third w3-margin-bottom">
+    <ul class="w3-ul w3-border w3-center w3-hover-shadow">
+      <li class="w3-black w3-xlarge w3-padding-32">Premium</li>
+      <li class="w3-padding-16"><b>50+</b> Photography</li>
+      <li class="w3-padding-16"><b>15</b> Graphics Designs</li>
+      <li class="w3-padding-16"><b>15</b> Boosting</li>
+      <li class="w3-padding-16"><i class="fa fa-check-circle"></i> Verified Badge</li>
+      <li class="w3-padding-16"><b>Endless</b> Support</li>
+      <li class="w3-padding-16">
+        <h2 class="w3-wide">$30</h2>
+        <span class="w3-opacity">per month</span>
+      </li>
+      <li class="w3-light-grey w3-padding-24">
+        <button class="w3-button w3-green w3-padding-large">Sign Up</button>
+      </li>
+    </ul>
+  </div>
+
+</div>
 
 <!-- CONTACT -->
 <div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
@@ -215,48 +288,14 @@ and digital services to help ideas grow into real results. <br> From building we
 </footer>
 
 <script>
-const teamData = [
-{img:"shishirr.jpg", phone:"+9779761120781"},
-{img:"sa.jpg", phone:"+9779702828872"},
-{img:"rishav.jpg", phone:"+9779827880571"},
-{img:"raj.jpg", phone:"+9779818195923"},
-{img:"phu.jpg", phone:"+9779818543031"},
-{img:"pradip.jpg", phone:"+9779761076795"},
-{img:"wan.jpg", phone:"+9779745346957"},
-{img:"himanshu.jpg", phone:"+9779803631685"}
-];
-
-const teamContainer = document.getElementById("teamContainer");
-
-teamData.forEach(member=>{
-const card = document.createElement("div");
-card.className="team-card";
-card.innerHTML=`
-<img src="${member.img}">
-<button class="w3-button w3-light-grey w3-block"
-onclick="window.open('https://wa.me/${member.phone.replace(/\D/g,'')}', '_blank')">
-Contact
-</button>`;
-teamContainer.appendChild(card);
-});
-
-function closeImageAlert(){
-document.getElementById("imageAlert").style.display="none";
-}
-// Toggle between showing and hiding the sidebar when clicking the menu icon
 var mySidebar = document.getElementById("mySidebar");
 
 function w3_open() {
-  if (mySidebar.style.display === 'block') {
-    mySidebar.style.display = 'none';
-  } else {
-    mySidebar.style.display = 'block';
-  }
+  mySidebar.style.display = (mySidebar.style.display === 'block') ? 'none' : 'block';
 }
 
-// Close the sidebar with the close button
 function w3_close() {
-    mySidebar.style.display = "none";
+  mySidebar.style.display = "none";
 }
 </script>
 
